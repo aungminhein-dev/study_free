@@ -1,12 +1,12 @@
 @extends('auth.layout.app')
-@section('title', 'Create New User')
+@section('title', 'Edit User Information')
 @section('content')
     <div class="py-4">
 
         <div class="d-flex justify-content-between w-100 flex-wrap">
             <div class="mb-3 mb-lg-0">
-                <h1 class="h4">Create New User</h1>
-                <p class="mb-0">Create more users with multiple to get more dynamics!
+                <h1 class="h4">Edit User Information</h1>
+                <p class="mb-0">Edit more users with multiple to get more dynamics!
                 </p>
             </div>
             <div>
@@ -20,6 +20,15 @@
         <div class="col-12 mb-4">
             <div class="card border-0 shadow components-section">
                 <div class="card-body">
+                    @if ($errors->any())
+                <div class="alert alert-danger">
+                    <ul>
+                        @foreach ($errors->all() as $error)
+                            <li>{{ $error }}</li>
+                        @endforeach
+                    </ul>
+                </div>
+            @endif
                     {{-- <div class="row mb-4">
                     <div class="col-lg-4 col-sm-6">
                         <!-- Form -->
@@ -356,10 +365,11 @@
 
                         <div class="form-group mb-4 col-12 col-sm-4">
                             <label for="gender">Role</label>
-                            <select class="form-select mb-0" name="" id="gender" aria-label="Select gender">
-                                <option disabled>Select role</option>
+                            <select class="form-select mb-0" name="roles[]" id="roles" aria-label="Select roles" multiple>
                                 @foreach ($roles as $role)
-                                    <option value="{{ $role->id }}">{{ $role->name }}</option>
+                                    <option value="{{ $role->id }}" {{ in_array($role->id, $userRoles) ? 'selected' : '' }}>
+                                        {{ $role->name }}
+                                    </option>
                                 @endforeach
                             </select>
                         </div>
@@ -377,7 +387,7 @@
                             </div> --}}
                         </div>
                         <div class="">
-                            <button type="submit" class="btn btn-gray-800">Create</button>
+                            <button type="submit" class="btn btn-gray-800">Save</button>
                         </div>
                     </form>
                 </div>

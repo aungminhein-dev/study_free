@@ -2,7 +2,6 @@
 
 namespace Database\Seeders;
 
-use App\Models\User;
 use Illuminate\Database\Seeder;
 use Spatie\Permission\Models\Role;
 use Spatie\Permission\Models\Permission;
@@ -12,14 +11,60 @@ class RoleAndPermissionSeeder extends Seeder
     public function run()
     {
         // Create permissions
-        Permission::create(['name' => 'view users']);
-        Permission::create(['name' => 'manage roles']);
+        $permissions = [
+            'create permissions',
+            'view permissions',
+            'update permissions',
+            'delete permissions',
+            'create users',
+            'view users',
+            'update users',
+            'delete users',
+            'create roles',
+            'view roles',
+            'update roles',
+            'delete roles',
+        ];
 
-        // Create roles and assign existing permissions
+        foreach ($permissions as $permission) {
+            Permission::create(['name' => $permission]);
+        }
+
+        // Create roles and assign permissions
+
+        // Admin role with full access
         $adminRole = Role::create(['name' => 'admin']);
         $adminRole->givePermissionTo(Permission::all());
 
-        $teacherRole = Role::create(['name' => 'teacher']);
-        $teacherRole->givePermissionTo('view users');
+        // Editor role with CRUD access to content (e.g., users)
+        $editorRole = Role::create(['name' => 'editor']);
+        $editorRole->givePermissionTo([
+            'create users',
+            'view users',
+            'update users',
+            'delete users',
+        ]);
+
+        // Viewer role with read-only access
+        $viewerRole = Role::create(['name' => 'viewer']);
+        $viewerRole->givePermissionTo([
+            'view users',
+        ]);
+
+        // Author role with create and edit access
+        $authorRole = Role::create(['name' => 'author']);
+        $authorRole->givePermissionTo([
+            'create users',
+            'update users',
+        ]);
+
+        // Moderator role with permissions to manage roles and permissions
+        $moderatorRole = Role::create(['name' => 'moderator']);
+        $moderatorRole->givePermissionTo([
+            'view roles',
+            'update roles',
+            'view permissions',
+            'update permissions',
+        ]);
     }
 }

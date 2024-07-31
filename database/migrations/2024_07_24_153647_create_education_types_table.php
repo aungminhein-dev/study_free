@@ -14,7 +14,7 @@ return new class extends Migration
             $table->id();
             $table->string('name');
             $table->longtext('description')->nullable();
-            $table->boolean('publish_status');
+            $table->boolean('publish_status')->default(false);
             $table->timestamps();
         });
     }

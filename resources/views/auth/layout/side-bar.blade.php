@@ -321,7 +321,7 @@
                     </div>
                 </li>
             @endcan
-            @can('view users')
+            @hasrole('admin')
                 <li class="nav-item {{ request()->is('manage-roles/*') ? 'active' : '' }}">
                     <span class="nav-link  collapsed  d-flex justify-content-between align-items-center"
                         data-bs-toggle="collapse" data-bs-target="#submenu-roles">
@@ -358,7 +358,7 @@
                         </ul>
                     </div>
                 </li>
-            @endcan
+            @endhasrole
 
 
 

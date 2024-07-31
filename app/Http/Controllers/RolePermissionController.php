@@ -9,6 +9,12 @@ use Spatie\Permission\Models\Permission;
 
 class RolePermissionController extends Controller
 {
+    public function __construct()
+    {
+        if(!auth()->user()->hasRole("admin")){
+            abort(404);
+        }
+    }
     public function index()
     {
         $roles = Role::all();
@@ -42,28 +48,31 @@ class RolePermissionController extends Controller
         ]);
 
         // Create the new role
-        $role = Role::create(['name' => $request->input('roleName')]);
+        $role = Role::create(['name' => strtolower($request->input('roleName'))]);
         if ($request->has('permissions')) {
             $permissions = $request->input('permissions');
             $role->syncPermissions($permissions);
         }
-
-        // Redirect back with success message
         return to_route('manage-roles.index')->with('success', 'Role created successfully.');
     }
-
-
     public function show(Role $role)
     {
         $permissions = Permission::all();
         return view('auth.manage-roles.show', compact('role', 'permissions'));
     }
 
-    public function edit(Role $role)
+    public function edit($id)
     {
-        $permissions = Permission::all();
-        return view('auth.manage-roles.edit', compact('role', 'permissions'));
+        // Retrieve all permissions and associated permissions for the given role
+        $permissions = Permission::all()->groupBy(function ($permission) {
+            $parts = explode(' ', $permission->name);
+            return $parts[1] ?? 'general'; // Group by entity, default to 'general'
+        });
+        $role = Role::findOrFail($id);
+        $rolePermissions = $role->permissions->pluck('name')->toArray();
+        return view('auth.manage-roles.edit', compact('role', 'permissions', 'rolePermissions'));
     }
+
 
     public function update(Request $request, Role $role)
     {

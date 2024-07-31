@@ -2,12 +2,13 @@
 
 namespace App\Http\Controllers\admin;
 
+use Throwable;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Spatie\Permission\Models\Role;
+use Illuminate\Support\Facades\Log;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Hash;
-use Throwable;
 
 class UserController extends Controller
 {
@@ -58,38 +59,52 @@ class UserController extends Controller
         $roles = Role::all();
         $userId = base64_decode($encodedId);
         $user = User::findOrFail($userId);
-        return view('auth.user.edit', compact('user', 'roles'));
+        $roles = Role::all(); // Get all available roles
+        $userRoles = $user->roles->pluck('id')->toArray();
+        return view('auth.user.edit', compact('user', 'roles','userRoles'));
     }
 
     public function update(Request $request, $encodedId)
-    {
+{
+    try {
+        // Decode the user ID and find the user
+        $userId = base64_decode($encodedId);
+        $user = User::findOrFail($userId); // Ensure the user exists
 
-        try {
-            $user = User::where('id', base64_decode($encodedId))->first();
-            $request->validate([
-                'name' => 'required',
-                'email' => 'unique:users,email,' . $user->id,
-                'username' => 'required|string|max:250',
-            ]);
+        // Validate the request
+        $request->validate([
+            'name' => 'required|string|max:255',
+            'email' => 'required|email|unique:users,email,' . $user->id,
+            'username' => 'required|string|max:250',
+            'roles' => 'array|exists:roles,id', // Ensure the roles field is an array and all role IDs exist
+        ]);
 
-            $data = [
-                'name' => $request->name,
-                'email' => $request->email,
-                'username' => $request->username,
-                'phone' => $request->phone,
-                'address' => $request->address,
-                'gender' => $request->gender
-            ];
+        // Prepare the data for user update
+        $data = [
+            'name' => $request->input('name'),
+            'email' => $request->input('email'),
+            'username' => $request->input('username'),
+            'phone' => $request->input('phone'),
+            'address' => $request->input('address'),
+            'gender' => $request->input('gender')
+        ];
 
-            $user->update($data);
+        // Update the user information
+        $user->update($data);
 
-            // $role = Role::findOrFail($request->role_id);
-            // $user->syncRoles($role);
-            return back();
-        } catch (Throwable $th) {
-            dd($th);
-        };
+        // Sync roles
+        $roleIds = $request->input('roles', []); // Get the array of role IDs
+        $roles = Role::whereIn('id', $roleIds)->get(); // Fetch the roles
+        $user->syncRoles($roles); // Sync roles to the user
+
+        return redirect()->back()->with('success', 'User updated successfully.');
+
+    } catch (Throwable $th) {
+        // Log the error and return a friendly message
+        Log::error('User update failed: ' . $th->getMessage());
+        return redirect()->back()->with('error', 'Failed to update user. Please try again.');
     }
+}
 
     public function destroy($encodedId)
     {
