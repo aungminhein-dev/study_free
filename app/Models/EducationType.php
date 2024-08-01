@@ -9,7 +9,7 @@ class EducationType extends Model
 {
     use HasFactory;
 
-    protected $fillable = ['name','description'];
+    protected $fillable = ['name','description','status'];
 
     public function subjects()
     {

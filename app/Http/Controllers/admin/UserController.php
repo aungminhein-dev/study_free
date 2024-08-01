@@ -12,6 +12,11 @@ use Illuminate\Support\Facades\Hash;
 
 class UserController extends Controller
 {
+    // public function __construct()
+    // {
+    //     $this->middleware('role:admin');
+    // }
+
     public function list()
     {
         $users = User::all();
@@ -20,6 +25,7 @@ class UserController extends Controller
 
     public function create()
     {
+        abort(500, 'This is a custom 500 error message.');
         $roles = Role::get();
         return view('auth.user.create', compact('roles'));
     }

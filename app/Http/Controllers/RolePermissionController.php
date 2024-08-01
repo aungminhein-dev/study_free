@@ -6,14 +6,13 @@ use Illuminate\Http\Request;
 use Illuminate\Validation\Rule;
 use Spatie\Permission\Models\Role;
 use Spatie\Permission\Models\Permission;
+use Illuminate\Routing\Controller as BaseController;
 
-class RolePermissionController extends Controller
+class RolePermissionController extends BaseController
 {
     public function __construct()
     {
-        if(!auth()->user()->hasRole("admin")){
-            abort(404);
-        }
+        $this->middleware(['role:admin']);
     }
     public function index()
     {
@@ -73,19 +72,23 @@ class RolePermissionController extends Controller
         return view('auth.manage-roles.edit', compact('role', 'permissions', 'rolePermissions'));
     }
 
-
-    public function update(Request $request, Role $role)
+    public function update(Request $request,$roleId)
     {
+        $role = Role::find($roleId);
         $validated = $request->validate([
-            'name' => 'required|unique:roles,name,' . $role->id,
+            'roleName' => [
+                'required',
+                Rule::unique('roles', 'name')->ignore($role->id),
+            ],
             'permissions' => 'required|array',
         ]);
 
-        $role->update(['name' => $validated['name']]);
+        $role->update(['name' => $validated['roleName']]);
         $role->syncPermissions($validated['permissions']);
 
         return to_route('manage-roles.index')->with('success', 'Role updated successfully.');
     }
+
 
     public function destroy($role_id)
     {

@@ -2,18 +2,16 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\EducationType;
 use Illuminate\Http\Request;
 
-class EducationTypeController extends Controller
+class AcademicLevelController extends Controller
 {
     /**
      * Display a listing of the resource.
      */
     public function index()
     {
-        $educationTypes = EducationType::all();
-        return view('auth.education-type.index',compact('educationTypes'));
+        //
     }
 
     /**
@@ -21,8 +19,7 @@ class EducationTypeController extends Controller
      */
     public function create()
     {
-        return view('auth.education-type.create');
-
+        //
     }
 
     /**
@@ -30,16 +27,7 @@ class EducationTypeController extends Controller
      */
     public function store(Request $request)
     {
-        $status = false;
-        if($request->status){
-            $status = true;
-        }
-        $data = [
-            'name' => $request->name,
-            'publish_status' => $status
-        ];
-        EducationType::create($data);
-        return to_route('education-types.index');
+        //
     }
 
     /**

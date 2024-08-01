@@ -16,6 +16,8 @@ class DatabaseSeeder extends Seeder
             RoleAndPermissionSeeder::class,
             UserSeeder::class,
             PracticePaperSeeder::class,
+            EducationTypeSeeder::class,
+            AcademicLevelSeeder::class,
         ]);
     }
 }

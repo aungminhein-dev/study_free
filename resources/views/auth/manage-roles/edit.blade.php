@@ -145,13 +145,14 @@
                     </div>
                 @endif
 
-                <form action="{{ route('manage-roles.store') }}" method="post">
+                <form action="{{ route('manage-roles.update',['manage_role'=> $role->id]) }}" method="post">
                     @csrf
+                    @method('PUT')
                     <div class="row">
                         <div class="col-md-6 mb-3">
                             <div>
                                 <label for="name">Name</label>
-                                <input class="form-control" value="{{ old('roleName') }}" type="text" name="roleName"
+                                <input class="form-control" value="{{ old('roleName',$role->name) }}" type="text" name="roleName"
                                     placeholder="Enter a role name...">
                             </div>
                         </div>

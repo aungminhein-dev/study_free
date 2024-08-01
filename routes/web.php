@@ -1,11 +1,14 @@
 <?php
 
+use App\Models\AcademicLevels;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\SettingController;
+use App\Http\Controllers\SubjectController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\admin\UserController;
-use App\Http\Controllers\admin\SettingController;
+use App\Http\Controllers\AcademicLevelController;
 use App\Http\Controllers\EducationTypeController;
 use App\Http\Controllers\RolePermissionController;
 
@@ -22,6 +25,8 @@ Route::middleware(['auth:web', config('jetstream.auth_session'), 'verified',])->
     Route::get('dashboard', [DashboardController::class, 'dashboard'])->name('dashboard');
     Route::resource('education-types', EducationTypeController::class);
     Route::resource('manage-roles', RolePermissionController::class);
+    Route::resource('subjects',SubjectController::class);
+    Route::resource('academic-levels',AcademicLevelController::class);
 
 
     Route::middleware(['role:admin'])->group(function () {

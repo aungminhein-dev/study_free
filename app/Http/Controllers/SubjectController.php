@@ -3,26 +3,25 @@
 namespace App\Http\Controllers;
 
 use App\Models\EducationType;
+use App\Models\Subject;
 use Illuminate\Http\Request;
 
-class EducationTypeController extends Controller
+class SubjectController extends Controller
 {
     /**
      * Display a listing of the resource.
      */
     public function index()
     {
-        $educationTypes = EducationType::all();
-        return view('auth.education-type.index',compact('educationTypes'));
+        $subjects = Subject::with('educationType')->get();
+        return view('auth.subject.index',compact('subjects'));
     }
 
-    /**
-     * Show the form for creating a new resource.
-     */
+
     public function create()
     {
-        return view('auth.education-type.create');
-
+        $educationTypes = EducationType::all();
+        return view('auth.subject.create',compact('educationTypes'));
     }
 
     /**
@@ -30,16 +29,16 @@ class EducationTypeController extends Controller
      */
     public function store(Request $request)
     {
-        $status = false;
-        if($request->status){
-            $status = true;
-        }
+        $request->validate([
+            'name' => 'required',
+            'typeId' => 'required'
+        ]);
         $data = [
             'name' => $request->name,
-            'publish_status' => $status
+            'education_type_id' => $request->typeId
         ];
-        EducationType::create($data);
-        return to_route('education-types.index');
+        Subject::create($data);
+        return to_route('subjects.index');
     }
 
     /**
