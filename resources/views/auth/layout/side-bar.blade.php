@@ -173,54 +173,56 @@
                     </ul>
                 </div>
             </li> --}}
-
-
             {{-- <li role="separator" class="dropdown-divider mt-4 mb-3 border-gray-700"></li> --}}
-
-
-            <li class="nav-item {{ request()->is('education-types/*') ? 'active' : '' }}">
-                <span class="nav-link  collapsed  d-flex justify-content-between align-items-center"
-                    data-bs-toggle="collapse" data-bs-target="#submenu-edu-types">
-                    <span>
-                        <span class="sidebar-icon">
-                            <svg class="icon icon-xs me-2" fill="none" stroke="currentColor" viewBox="0 0 20 20"
+            @can('manage', App\Models\EducationType::class)
+                <li class="nav-item {{ request()->is('education-types*') ? 'active' : '' }}">
+                    <span class="nav-link  collapsed  d-flex justify-content-between align-items-center"
+                        data-bs-toggle="collapse" data-bs-target="#submenu-edu-types">
+                        <span>
+                            <span class="sidebar-icon">
+                                <svg class="icon icon-xs me-2" fill="none" stroke="currentColor" viewBox="0 0 20 20"
+                                    xmlns="http://www.w3.org/2000/svg">
+                                    <path d="M12 14l9-5-9-5-9 5 9 5z"></path>
+                                    <path
+                                        d="M12 14l6.16-3.422a12.083 12.083 0 01.665 6.479A11.952 11.952 0 0012 20.055a11.952 11.952 0 00-6.824-2.998 12.078 12.078 0 01.665-6.479L12 14z">
+                                    </path>
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                        d="M12 14l9-5-9-5-9 5 9 5zm0 0l6.16-3.422a12.083 12.083 0 01.665 6.479A11.952 11.952 0 0012 20.055a11.952 11.952 0 00-6.824-2.998 12.078 12.078 0 01.665-6.479L12 14zm-4 6v-7.5l4-2.222">
+                                    </path>
+                                </svg>
+                            </span>
+                            <span class="sidebar-text">Education Type</span>
+                        </span>
+                        <span class="link-arrow">
+                            <svg class="icon icon-sm" fill="currentColor" viewBox="0 0 20 20"
                                 xmlns="http://www.w3.org/2000/svg">
-                                <path d="M12 14l9-5-9-5-9 5 9 5z"></path>
-                                <path
-                                    d="M12 14l6.16-3.422a12.083 12.083 0 01.665 6.479A11.952 11.952 0 0012 20.055a11.952 11.952 0 00-6.824-2.998 12.078 12.078 0 01.665-6.479L12 14z">
-                                </path>
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                    d="M12 14l9-5-9-5-9 5 9 5zm0 0l6.16-3.422a12.083 12.083 0 01.665 6.479A11.952 11.952 0 0012 20.055a11.952 11.952 0 00-6.824-2.998 12.078 12.078 0 01.665-6.479L12 14zm-4 6v-7.5l4-2.222">
-                                </path>
+                                <path fill-rule="evenodd"
+                                    d="M7.293 14.707a1 1 0 010-1.414L10.586 10 7.293 6.707a1 1 0 011.414-1.414l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414 0z"
+                                    clip-rule="evenodd"></path>
                             </svg>
                         </span>
-                        <span class="sidebar-text">Education Type</span>
                     </span>
-                    <span class="link-arrow">
-                        <svg class="icon icon-sm" fill="currentColor" viewBox="0 0 20 20"
-                            xmlns="http://www.w3.org/2000/svg">
-                            <path fill-rule="evenodd"
-                                d="M7.293 14.707a1 1 0 010-1.414L10.586 10 7.293 6.707a1 1 0 011.414-1.414l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414 0z"
-                                clip-rule="evenodd"></path>
-                        </svg>
-                    </span>
-                </span>
-                <div class="multi-level collapse" role="list" id="submenu-edu-types" aria-expanded="false">
-                    <ul class="flex-column nav">
-                        <li class="nav-item {{ request()->routeIs('education-types.index') ? 'active' : '' }}">
-                            <a class="nav-link" href="{{ route('education-types.index') }}">
-                                <span class="sidebar-text">List</span>
-                            </a>
-                        </li>
-                        <li class="nav-item {{ request()->routeIs('education-types.create') ? 'active' : '' }}">
-                            <a class="nav-link" href="{{ route('education-types.create') }}">
-                                <span class="sidebar-text">Create a Type</span>
-                            </a>
-                        </li>
-                    </ul>
-                </div>
-            </li>
-            <li class="nav-item {{ request()->is('subjects/*') ? 'active' : '' }}">
+                    <div class="multi-level collapse" role="list" id="submenu-edu-types" aria-expanded="false">
+                        <ul class="flex-column nav">
+                            @can('viewAny', App\Models\EducationType::class)
+                                <li class="nav-item {{ request()->routeIs('education-types.index') ? 'active' : '' }}">
+                                    <a class="nav-link" href="{{ route('education-types.index') }}">
+                                        <span class="sidebar-text">List</span>
+                                    </a>
+                                </li>
+                            @endcan
+                            @can('create education-types')
+                                <li class="nav-item {{ request()->routeIs('education-types.create') ? 'active' : '' }}">
+                                    <a class="nav-link" href="{{ route('education-types.create') }}">
+                                        <span class="sidebar-text">Create a Type</span>
+                                    </a>
+                                </li>
+                            @endcan
+                        </ul>
+                    </div>
+                </li>
+            @endcan
+            <li class="nav-item {{ request()->is('subjects*') ? 'active' : '' }}">
                 <span class="nav-link  collapsed  d-flex justify-content-between align-items-center"
                     data-bs-toggle="collapse" data-bs-target="#submenu-subjects">
                     <span>
@@ -260,7 +262,7 @@
                 </div>
             </li>
             @can('view users')
-                <li class="nav-item {{ request()->is('users/*') ? 'active' : '' }}">
+                <li class="nav-item {{ request()->is('users*') ? 'active' : '' }}">
                     <span class="nav-link  collapsed  d-flex justify-content-between align-items-center"
                         data-bs-toggle="collapse" data-bs-target="#submenu-users">
                         <span>
@@ -298,16 +300,17 @@
                 </li>
             @endcan
             @hasrole('admin')
-                <li class="nav-item {{ request()->is('manage-roles/*') ? 'active' : '' }}">
+                <li class="nav-item {{ request()->is('manage-roles*') ? 'active' : '' }}">
                     <span class="nav-link  collapsed  d-flex justify-content-between align-items-center"
                         data-bs-toggle="collapse" data-bs-target="#submenu-roles">
                         <span>
                             <span class="sidebar-icon"><svg class="icon icon-xs me-2" fill="currentColor"
                                     viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
-                                    <path
-                                        d="M9 6a3 3 0 11-6 0 3 3 0 016 0zM17 6a3 3 0 11-6 0 3 3 0 016 0zM12.93 17c.046-.327.07-.66.07-1a6.97 6.97 0 00-1.5-4.33A5 5 0 0119 16v1h-6.07zM6 11a5 5 0 015 5v1H1v-1a5 5 0 015-5z">
-                                    </path>
-                                </svg> </span>
+                                    <path fill-rule="evenodd"
+                                        d="M10 1.944A11.954 11.954 0 012.166 5C2.056 5.649 2 6.319 2 7c0 5.225 3.34 9.67 8 11.317C14.66 16.67 18 12.225 18 7c0-.682-.057-1.35-.166-2.001A11.954 11.954 0 0110 1.944zM11 14a1 1 0 11-2 0 1 1 0 012 0zm0-7a1 1 0 10-2 0v3a1 1 0 102 0V7z"
+                                        clip-rule="evenodd"></path>
+                                </svg>
+                            </span>
                             <span class="sidebar-text">Manage Roles</span>
                         </span>
                         <span class="link-arrow">

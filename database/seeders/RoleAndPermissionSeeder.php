@@ -24,6 +24,11 @@ class RoleAndPermissionSeeder extends Seeder
             'view roles',
             'update roles',
             'delete roles',
+            'create education-types',
+            'edit education-types',
+            'view education-types',
+            'update education-types',
+            'delete education-types'
         ];
 
         foreach ($permissions as $permission) {
@@ -43,6 +48,11 @@ class RoleAndPermissionSeeder extends Seeder
             'view users',
             'update users',
             'delete users',
+            'create education-types',
+            'edit education-types',
+            'view education-types',
+            'update education-types',
+            'delete education-types'
         ]);
 
         // Viewer role with read-only access

@@ -20,6 +20,7 @@ class UserSeeder extends Seeder
         $adminRole = Role::firstOrCreate(['name' => 'admin']);
         $teacherRole = Role::firstOrCreate(['name' => 'teacher']);
         $userRole = Role::firstOrCreate(['name' => 'user']);
+        $editorRole = Role::firstOrCreate(['name' => 'editor']);
 
         // Define the password for all users
         $password = Hash::make('password'); // Use a hashed password for security
@@ -51,6 +52,17 @@ class UserSeeder extends Seeder
             [
                 'name' => 'Teacher Two',
                 'email' => 'teacher2@example.com',
+                'phone' => '1234567892',
+                'address' => '789 Teacher Blvd',
+                'birthday' => '1990-03-03',
+                'gender' => 'male',
+                'username' => 'teachertwo',
+                'password' => $password,
+                'roles' => [$editorRole->name],
+            ],
+            [
+                'name' => 'Editor',
+                'email' => 'editor@gmail.com',
                 'phone' => '1234567892',
                 'address' => '789 Teacher Blvd',
                 'birthday' => '1990-03-03',

@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\EducationType;
 use Illuminate\Http\Request;
+use Throwable;
 
 class EducationTypeController extends Controller
 {
@@ -13,7 +14,7 @@ class EducationTypeController extends Controller
     public function index()
     {
         $educationTypes = EducationType::all();
-        return view('auth.education-type.index',compact('educationTypes'));
+        return view('auth.education-type.index', compact('educationTypes'));
     }
 
     /**
@@ -22,32 +23,29 @@ class EducationTypeController extends Controller
     public function create()
     {
         return view('auth.education-type.create');
-
     }
 
-    /**
-     * Store a newly created resource in storage.
-     */
     public function store(Request $request)
     {
-        $status = false;
-        if($request->status){
-            $status = true;
+        try {
+            $request->validate([
+                'name' => 'required|string|max:255',
+                'status' => 'nullable|string'
+            ]);
+            $status = $request->status === 'on';
+            $data = [
+                'name' => $request->name,
+                'publish_status' => $status
+            ];
+            EducationType::create($data);
+        } catch (Throwable $th) {
+            return response()->json($th);
         }
-        $data = [
-            'name' => $request->name,
-            'publish_status' => $status
-        ];
-        EducationType::create($data);
         return to_route('education-types.index');
     }
 
-    /**
-     * Display the specified resource.
-     */
     public function show(string $id)
     {
-        //
     }
 
     /**
@@ -55,7 +53,8 @@ class EducationTypeController extends Controller
      */
     public function edit(string $id)
     {
-        //
+        $data = EducationType::findOrfail($id);
+        return view('auth.education-type.edit', compact('data'));
     }
 
     /**
@@ -63,7 +62,21 @@ class EducationTypeController extends Controller
      */
     public function update(Request $request, string $id)
     {
-        //
+        try {
+            $request->validate([
+                'name' => 'required|string|max:255',
+                'status' => 'nullable|string'
+            ]);
+            $status = $request->status === 'on';
+            $data = [
+                'name' => $request->name,
+                'publish_status' => $status
+            ];
+            EducationType::where('id', $id)->update($data);
+        } catch (Throwable $th) {
+            return response()->json($th);
+        }
+        return to_route('education-types.index');
     }
 
     /**
@@ -71,6 +84,13 @@ class EducationTypeController extends Controller
      */
     public function destroy(string $id)
     {
-        //
+        EducationType::where('id', $id)->delete();
+        return back();
+    }
+
+    public function unpublish($id)
+    {
+        EducationType::where('id', $id)->update(['publish_status' => false]);
+        return back();
     }
 }

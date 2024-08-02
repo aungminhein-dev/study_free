@@ -4,16 +4,21 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Illuminate\Validation\Rule;
+use Illuminate\Routing\Controller;
 use Spatie\Permission\Models\Role;
 use Spatie\Permission\Models\Permission;
-use Illuminate\Routing\Controller as BaseController;
+// use Illuminate\Routing\Controllers\Middleware;
+// use Illuminate\Routing\Controllers\HasMiddleware;
 
-class RolePermissionController extends BaseController
+class RolePermissionController extends Controller
 {
-    public function __construct()
-    {
-        $this->middleware(['role:admin']);
-    }
+    // public static function middleware(): array
+    // {
+    //     return [
+    //         'role:admin',
+    //     ];
+    // }
+
     public function index()
     {
         $roles = Role::all();
@@ -22,7 +27,6 @@ class RolePermissionController extends BaseController
 
     public function create()
     {
-        // Fetch all permissions
         $permissions = Permission::all()->groupBy(function ($permission) {
             $parts = explode(' ', $permission->name);
             return $parts[1] ?? 'general'; // Group by entity, default to 'general'
@@ -72,7 +76,7 @@ class RolePermissionController extends BaseController
         return view('auth.manage-roles.edit', compact('role', 'permissions', 'rolePermissions'));
     }
 
-    public function update(Request $request,$roleId)
+    public function update(Request $request, $roleId)
     {
         $role = Role::find($roleId);
         $validated = $request->validate([

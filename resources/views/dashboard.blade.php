@@ -64,6 +64,9 @@
         </div>
     </div>
     <div class="row">
+        @foreach ($permissions as $p)
+        <span class="text-danger">{{ $p->name }}</span>
+        @endforeach
         <div class="col-12 mb-4">
             <div class="card bg-yellow-100 border-0 shadow">
                 <div class="card-header d-sm-flex flex-row align-items-center flex-0">

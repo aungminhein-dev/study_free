@@ -5,8 +5,8 @@
 
         <div class="d-flex justify-content-between w-100 flex-wrap">
             <div class="mb-3 mb-lg-0">
-                <h1 class="h4">Create New Education Type</h1>
-                <p class="mb-0">Create more types with multiple to get more dynamics!
+                <h1 class="h4">Edit Education Type</h1>
+                <p class="mb-0">Edit more types with multiple to get more dynamics!
                 </p>
             </div>
             <div>
@@ -37,7 +37,7 @@
                             <div class="input-group">
                                 <input type="text" class="form-control @error('username') is-invalid @enderror"
                                     placeholder="(igcse, ged, grade-12) or Anything u want" id="username"
-                                    value="{{ old('name') }}" name="name">
+                                    value="{{ old('name',$data->name) }}" name="name">
                             </div>
                             @error('name')
                                 <span class="text-danger">{{ $message }}</span>
@@ -47,7 +47,7 @@
                             <label for=""> Publish?
                             </label>
                             <div class="form-check">
-                                <input class="form-check-input" type="checkbox" name="status">
+                                <input class="form-check-input" type="checkbox" @checked($data->publish_status) name="status">
                             </div>
                         </div>
                         <div class="">

@@ -16,6 +16,7 @@ class EducationTypeSeeder extends Seeder
         DB::table('education_types')->insert([
             ['name' => 'Grade-12 (Myanmar)', 'publish_status' => true],
             ['name' => 'IGCSE', 'publish_status' => true],
+            ['name' => 'GED', 'publish_status' => true],
         ]);
     }
 }
