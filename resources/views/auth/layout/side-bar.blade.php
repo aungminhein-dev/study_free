@@ -1,14 +1,14 @@
-<nav id="sidebarMenu" class="sidebar d-lg-block bg-gray-800 text-white collapse" data-simplebar>
-    <div class="sidebar-inner px-4 pt-3">
+<nav id="sidebarMenu" class="text-white bg-gray-800 sidebar d-lg-block collapse" data-simplebar>
+    <div class="px-4 pt-3 sidebar-inner">
         <div
-            class="user-card d-flex d-md-none align-items-center justify-content-between justify-content-md-center pb-4">
+            class="pb-4 user-card d-flex d-md-none align-items-center justify-content-between justify-content-md-center">
             <div class="d-flex align-items-center">
                 <div class="avatar-lg me-4">
                     <img src="{{ asset('admin_ui/assets/img/team/profile-picture-3.jpg') }}"
-                        class="card-img-top rounded-circle border-white" alt="Bonnie Green">
+                        class="border-white card-img-top rounded-circle" alt="Bonnie Green">
                 </div>
                 <div class="d-block">
-                    <h2 class="h5 mb-3">Hi, Jane</h2>
+                    <h2 class="mb-3 h5">Hi, Jane</h2>
                     <form id="logoutForm" action="{{ route('logout') }}" method="post">
                         @csrf
                     </form>
@@ -35,7 +35,7 @@
                 </a>
             </div>
         </div>
-        <ul class="nav flex-column pt-3 pt-md-0">
+        <ul class="pt-3 nav flex-column pt-md-0">
             <li class="nav-item">
                 <a href="{{ route('dashboard') }}" class="nav-link d-flex align-items-center">
                     {{-- <span class="sidebar-icon">
@@ -81,7 +81,7 @@
                         <span class="sidebar-text">Kanban</span>
                     </span>
                     <span>
-                        <span class="badge badge-sm bg-secondary ms-1 text-gray-800">Pro</span>
+                        <span class="text-gray-800 badge badge-sm bg-secondary ms-1">Pro</span>
                     </span>
                 </a>
             </li>
@@ -117,7 +117,7 @@
                         <span class="sidebar-text">Calendar</span>
                     </span>
                     <span>
-                        <span class="badge badge-sm bg-secondary ms-1 text-gray-800">Pro</span>
+                        <span class="text-gray-800 badge badge-sm bg-secondary ms-1">Pro</span>
                     </span>
                 </a>
             </li>
@@ -136,12 +136,12 @@
                         <span class="sidebar-text">Map</span>
                     </span>
                     <span>
-                        <span class="badge badge-sm bg-secondary ms-1 text-gray-800">Pro</span>
+                        <span class="text-gray-800 badge badge-sm bg-secondary ms-1">Pro</span>
                     </span>
                 </a>
             </li>
             <li class="nav-item">
-                <span class="nav-link  collapsed  d-flex justify-content-between align-items-center"
+                <span class="nav-link collapsed d-flex justify-content-between align-items-center"
                     data-bs-toggle="collapse" data-bs-target="#submenu-app">
                     <span>
                         <span class="sidebar-icon">
@@ -173,10 +173,10 @@
                     </ul>
                 </div>
             </li> --}}
-            {{-- <li role="separator" class="dropdown-divider mt-4 mb-3 border-gray-700"></li> --}}
+            {{-- <li role="separator" class="mt-4 mb-3 border-gray-700 dropdown-divider"></li> --}}
             @can('manage', App\Models\EducationType::class)
                 <li class="nav-item {{ request()->is('education-types*') ? 'active' : '' }}">
-                    <span class="nav-link  collapsed  d-flex justify-content-between align-items-center"
+                    <span class="nav-link collapsed d-flex justify-content-between align-items-center"
                         data-bs-toggle="collapse" data-bs-target="#submenu-edu-types">
                         <span>
                             <span class="sidebar-icon">
@@ -211,7 +211,7 @@
                                     </a>
                                 </li>
                             @endcan
-                            @can('create education-types')
+                            @can('create', App\Models\EducationType::class)
                                 <li class="nav-item {{ request()->routeIs('education-types.create') ? 'active' : '' }}">
                                     <a class="nav-link" href="{{ route('education-types.create') }}">
                                         <span class="sidebar-text">Create a Type</span>
@@ -223,7 +223,7 @@
                 </li>
             @endcan
             <li class="nav-item {{ request()->is('subjects*') ? 'active' : '' }}">
-                <span class="nav-link  collapsed  d-flex justify-content-between align-items-center"
+                <span class="nav-link collapsed d-flex justify-content-between align-items-center"
                     data-bs-toggle="collapse" data-bs-target="#submenu-subjects">
                     <span>
                         <span class="sidebar-icon">
@@ -261,9 +261,9 @@
                     </ul>
                 </div>
             </li>
-            @can('view users')
+            @can('manage', App\Models\User::class)
                 <li class="nav-item {{ request()->is('users*') ? 'active' : '' }}">
-                    <span class="nav-link  collapsed  d-flex justify-content-between align-items-center"
+                    <span class="nav-link collapsed d-flex justify-content-between align-items-center"
                         data-bs-toggle="collapse" data-bs-target="#submenu-users">
                         <span>
                             <span class="sidebar-icon"><svg class="icon icon-xs me-2" fill="currentColor"
@@ -285,23 +285,27 @@
                     </span>
                     <div class="multi-level collapse " role="list" id="submenu-users" aria-expanded="false">
                         <ul class="flex-column nav">
-                            <li class="nav-item {{ request()->routeIs('admin.users.list') ? 'active' : '' }}">
-                                <a class="nav-link" href="{{ route('admin.users-list') }}">
-                                    <span class="sidebar-text">List</span>
-                                </a>
-                            </li>
-                            <li class="nav-item {{ request()->routeIs('admin.create-user') ? 'active' : '' }}">
-                                <a class="nav-link" href="{{ route('admin.create-user') }}">
-                                    <span class="sidebar-text">Create New User</span>
-                                </a>
-                            </li>
+                            @can('view', App\Models\Use::class)
+                                <li class="nav-item {{ request()->routeIs('admin.users.list') ? 'active' : '' }}">
+                                    <a class="nav-link" href="{{ route('admin.users-list') }}">
+                                        <span class="sidebar-text">List</span>
+                                    </a>
+                                </li>
+                            @endcan
+                            @can('create users')
+                                <li class="nav-item {{ request()->routeIs('admin.create-user') ? 'active' : '' }}">
+                                    <a class="nav-link" href="{{ route('admin.create-user') }}">
+                                        <span class="sidebar-text">Create New User</span>
+                                    </a>
+                                </li>
+                            @endcan
                         </ul>
                     </div>
                 </li>
             @endcan
-            @hasrole('admin')
+            @can('manage', Spatie\Permission\Models\Role::class)
                 <li class="nav-item {{ request()->is('manage-roles*') ? 'active' : '' }}">
-                    <span class="nav-link  collapsed  d-flex justify-content-between align-items-center"
+                    <span class="nav-link collapsed d-flex justify-content-between align-items-center"
                         data-bs-toggle="collapse" data-bs-target="#submenu-roles">
                         <span>
                             <span class="sidebar-icon"><svg class="icon icon-xs me-2" fill="currentColor"
@@ -329,20 +333,22 @@
                                     <span class="sidebar-text">List</span>
                                 </a>
                             </li>
-                            <li class="nav-item {{ request()->routeIs('manage-roles.create') ? 'active' : '' }}">
-                                <a class="nav-link" href="{{ route('manage-roles.create') }}">
-                                    <span class="sidebar-text">Create New Role</span>
-                                </a>
-                            </li>
+                            @can('create', Spatie\Permission\Models\Role::class)
+                                <li class="nav-item {{ request()->routeIs('manage-roles.create') ? 'active' : '' }}">
+                                    <a class="nav-link" href="{{ route('manage-roles.create') }}">
+                                        <span class="sidebar-text">Create New Role</span>
+                                    </a>
+                                </li>
+                            @endcan
                         </ul>
                     </div>
                 </li>
-            @endhasrole
+            @endcan
 
 
 
             {{-- <li class="nav-item">
-                <span class="nav-link  collapsed  d-flex justify-content-between align-items-center"
+                <span class="nav-link collapsed d-flex justify-content-between align-items-center"
                     data-bs-toggle="collapse" data-bs-target="#submenu-components">
                     <span>
                         <span class="sidebar-icon">
@@ -401,7 +407,7 @@
                     </ul>
                 </div>
             </li>
-            <li role="separator" class="dropdown-divider mt-4 mb-3 border-gray-700"></li>
+            <li role="separator" class="mt-4 mb-3 border-gray-700 dropdown-divider"></li>
             <li class="nav-item">
                 <a href="https://themesberg.com/docs/volt-bootstrap-5-dashboard/getting-started/quick-start/"
                     target="_blank" class="nav-link d-flex align-items-center">
@@ -414,7 +420,7 @@
                         </svg>
                     </span>
                     <span class="sidebar-text">Documentation <span
-                            class="badge badge-sm bg-secondary ms-1 text-gray-800">v1.4</span></span>
+                            class="text-gray-800 badge badge-sm bg-secondary ms-1">v1.4</span></span>
                 </a>
             </li>
             <li class="nav-item">

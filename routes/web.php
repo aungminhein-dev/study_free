@@ -24,12 +24,12 @@ Route::middleware(['auth:web', config('jetstream.auth_session'), 'verified',])->
     // Admin Routes
     Route::get('dashboard', [DashboardController::class, 'dashboard'])->name('dashboard');
     Route::resource('education-types', EducationTypeController::class)->middleware('can:view education-types,edit education-types,create education-types,update education-types,delete education-types');
-    Route::get('educations/publish/{id}',[EducationTypeController::class,'unpublish'])->name('education-types.unpublish');
+    Route::get('educations/publish/{id}', [EducationTypeController::class, 'unpublish'])->name('education-types.unpublish');
     Route::resource('manage-roles', RolePermissionController::class);
-    Route::resource('subjects',SubjectController::class);
-    Route::resource('academic-levels',AcademicLevelController::class);
+    Route::resource('subjects', SubjectController::class);
+    Route::resource('academic-levels', AcademicLevelController::class);
 
-    Route::middleware(['role:admin'])->group(function () {
+    Route::middleware(['role:founder'])->group(function () {
         Route::controller(UserController::class)->prefix('users')->group(function () {
             Route::get('list', 'list')->name('admin.users-list');
             Route::get('create', 'create')->name('admin.create-user');

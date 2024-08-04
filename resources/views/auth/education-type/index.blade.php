@@ -1,11 +1,12 @@
 @extends('auth.layout.app')
-@section('title', 'types')
+@section('title', 'Education Types')
 @section('content')
-    <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center py-4">
+    <div class="flex-wrap py-4 d-flex justify-content-between flex-md-nowrap align-items-center">
         <div>
             <div class="dropdown">
-                <a href="{{ route('education-types.create') }}" class="btn btn-secondary d-inline-flex align-items-center me-2 dropdown-toggle"
-                    data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                <a href="{{ route('education-types.create') }}"
+                    class="btn btn-secondary d-inline-flex align-items-center me-2 dropdown-toggle" data-bs-toggle="dropdown"
+                    aria-haspopup="true" aria-expanded="false">
                     <svg class="icon icon-xs me-2" fill="none" stroke="currentColor" viewBox="0 0 24 24"
                         xmlns="http://www.w3.org/2000/svg">
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
@@ -13,9 +14,9 @@
                     </svg>
                     New
                 </a>
-                <div class="dropdown-menu dashboard-dropdown dropdown-menu-start mt-2 py-1">
+                <div class="py-1 mt-2 dropdown-menu dashboard-dropdown dropdown-menu-start">
                     <a class="dropdown-item d-flex align-items-center" href="#">
-                        <svg class="dropdown-icon text-gray-400 me-2" fill="currentColor" viewBox="0 0 20 20"
+                        <svg class="text-gray-400 dropdown-icon me-2" fill="currentColor" viewBox="0 0 20 20"
                             xmlns="http://www.w3.org/2000/svg">
                             <path fill-rule="evenodd"
                                 d="M4 4a2 2 0 012-2h4.586A2 2 0 0112 2.586L15.414 6A2 2 0 0116 7.414V16a2 2 0 01-2 2H6a2 2 0 01-2-2V4zm2 6a1 1 0 011-1h6a1 1 0 110 2H7a1 1 0 01-1-1zm1 3a1 1 0 100 2h6a1 1 0 100-2H7z"
@@ -24,7 +25,7 @@
                         Document
                     </a>
                     <a class="dropdown-item d-flex align-items-center" href="#">
-                        <svg class="dropdown-icon text-gray-400 me-2" fill="currentColor" viewBox="0 0 20 20"
+                        <svg class="text-gray-400 dropdown-icon me-2" fill="currentColor" viewBox="0 0 20 20"
                             xmlns="http://www.w3.org/2000/svg">
                             <path fill-rule="evenodd"
                                 d="M18 10c0 3.866-3.582 7-8 7a8.841 8.841 0 01-4.083-.98L2 17l1.338-3.123C2.493 12.767 2 11.434 2 10c0-3.866 3.582-7 8-7s8 3.134 8 7zM7 9H5v2h2V9zm8 0h-2v2h2V9zM9 9h2v2H9V9z"
@@ -33,7 +34,7 @@
                         Message
                     </a>
                     <a class="dropdown-item d-flex align-items-center" href="#">
-                        <svg class="dropdown-icon text-gray-400 me-2" fill="currentColor" viewBox="0 0 20 20"
+                        <svg class="text-gray-400 dropdown-icon me-2" fill="currentColor" viewBox="0 0 20 20"
                             xmlns="http://www.w3.org/2000/svg">
                             <path
                                 d="M5.5 13a3.5 3.5 0 01-.369-6.98 4 4 0 117.753-1.977A4.5 4.5 0 1113.5 13H11V9.413l1.293 1.293a1 1 0 001.414-1.414l-3-3a1 1 0 00-1.414 0l-3 3a1 1 0 001.414 1.414L9 9.414V13H5.5z">
@@ -42,7 +43,7 @@
                         </svg>
                         Product
                     </a>
-                    <div role="separator" class="dropdown-divider my-1"></div>
+                    <div role="separator" class="my-1 dropdown-divider"></div>
                     <a class="dropdown-item d-flex align-items-center" href="#">
                         <svg class="dropdown-icon text-danger me-2" fill="currentColor" viewBox="0 0 20 20"
                             xmlns="http://www.w3.org/2000/svg">
@@ -78,9 +79,9 @@
                         clip-rule="evenodd"></path>
                 </svg>
             </button>
-            <div class="dropdown-menu dashboard-dropdown dropdown-menu-start mt-2 py-1">
+            <div class="py-1 mt-2 dropdown-menu dashboard-dropdown dropdown-menu-start">
                 <a class="dropdown-item d-flex align-items-center" href="#">
-                    <svg class="dropdown-icon text-gray-400 me-2" fill="currentColor" viewBox="0 0 20 20"
+                    <svg class="text-gray-400 dropdown-icon me-2" fill="currentColor" viewBox="0 0 20 20"
                         xmlns="http://www.w3.org/2000/svg">
                         <path d="M4 3a2 2 0 100 4h12a2 2 0 100-4H4z"></path>
                         <path fill-rule="evenodd"
@@ -90,7 +91,7 @@
                     Products
                 </a>
                 <a class="dropdown-item d-flex align-items-center" href="#">
-                    <svg class="dropdown-icon text-gray-400 me-2" fill="currentColor" viewBox="0 0 20 20"
+                    <svg class="text-gray-400 dropdown-icon me-2" fill="currentColor" viewBox="0 0 20 20"
                         xmlns="http://www.w3.org/2000/svg">
                         <path
                             d="M9 6a3 3 0 11-6 0 3 3 0 016 0zM17 6a3 3 0 11-6 0 3 3 0 016 0zM12.93 17c.046-.327.07-.66.07-1a6.97 6.97 0 00-1.5-4.33A5 5 0 0119 16v1h-6.07zM6 11a5 5 0 015 5v1H1v-1a5 5 0 015-5z">
@@ -99,7 +100,7 @@
                     Customers
                 </a>
                 <a class="dropdown-item d-flex align-items-center" href="#">
-                    <svg class="dropdown-icon text-gray-400 me-2" fill="currentColor" viewBox="0 0 20 20"
+                    <svg class="text-gray-400 dropdown-icon me-2" fill="currentColor" viewBox="0 0 20 20"
                         xmlns="http://www.w3.org/2000/svg">
                         <path fill-rule="evenodd"
                             d="M10 2a4 4 0 00-4 4v1H5a1 1 0 00-.994.89l-1 9A1 1 0 004 18h12a1 1 0 00.994-1.11l-1-9A1 1 0 0015 7h-1V6a4 4 0 00-4-4zm2 5V6a2 2 0 10-4 0v1h4zm-6 3a1 1 0 112 0 1 1 0 01-2 0zm7-1a1 1 0 100 2 1 1 0 000-2z"
@@ -108,7 +109,7 @@
                     Orders
                 </a>
                 <a class="dropdown-item d-flex align-items-center" href="#">
-                    <svg class="dropdown-icon text-gray-400 me-2" fill="currentColor" viewBox="0 0 20 20"
+                    <svg class="text-gray-400 dropdown-icon me-2" fill="currentColor" viewBox="0 0 20 20"
                         xmlns="http://www.w3.org/2000/svg">
                         <path fill-rule="evenodd"
                             d="M3 3a1 1 0 000 2v8a2 2 0 002 2h2.586l-1.293 1.293a1 1 0 101.414 1.414L10 15.414l2.293 2.293a1 1 0 001.414-1.414L12.414 15H15a2 2 0 002-2V5a1 1 0 100-2H3zm11 4a1 1 0 10-2 0v4a1 1 0 102 0V7zm-3 1a1 1 0 10-2 0v3a1 1 0 102 0V8zM8 9a1 1 0 00-2 0v2a1 1 0 102 0V9z"
@@ -116,9 +117,9 @@
                     </svg>
                     Console
                 </a>
-                <div role="separator" class="dropdown-divider my-1"></div>
+                <div role="separator" class="my-1 dropdown-divider"></div>
                 <a class="dropdown-item d-flex align-items-center" href="#">
-                    <svg class="dropdown-icon text-gray-800 me-2" fill="currentColor" viewBox="0 0 20 20"
+                    <svg class="text-gray-800 dropdown-icon me-2" fill="currentColor" viewBox="0 0 20 20"
                         xmlns="http://www.w3.org/2000/svg">
                         <path d="M9 2a1 1 0 000 2h2a1 1 0 100-2H9z"></path>
                         <path fill-rule="evenodd"
@@ -130,13 +131,13 @@
             </div>
         </div>
     </div>
-    <div class="card card-body shadow border-0 table-wrapper table-responsive">
-        <div class="d-flex mb-3"><select class="form-select fmxw-200" aria-label="Message select example">
+    <div class="border-0 shadow card card-body table-wrapper table-responsive">
+        <div class="mb-3 d-flex"><select class="form-select fmxw-200" aria-label="Message select example">
                 <option selected="selected">Bulk Action</option>
                 <option value="1">Send Email</option>
                 <option value="2">Change Group</option>
                 <option value="3">Delete User</option>
-            </select> <button class="btn btn-sm px-3 btn-secondary ms-3">Apply</button></div>
+            </select> <button class="px-3 btn btn-sm btn-secondary ms-3">Apply</button></div>
         <table class="table user-table table-hover align-items-center">
             <thead>
                 <tr>
@@ -167,27 +168,27 @@
                         <td>
 
                             @if ($type->publish_status)
-                            <div class="d-flex align-items-center">
-                                <div class="bg-success dot rounded-circle me-1"></div>
-                                <small class="text-success">
-                                    Published
-                                </small>
-                            </div>
+                                <div class="d-flex align-items-center">
+                                    <div class="bg-success dot rounded-circle me-1"></div>
+                                    <small class="text-success">
+                                        Published
+                                    </small>
+                                </div>
                             @else
-                            <div class="d-flex align-items-center">
-                                <div class="bg-danger dot rounded-circle me-1"></div>
-                                <small class="text-danger">
-                                    Unpublished
-                                </small>
-                            </div>
-                             @endif
+                                <div class="d-flex align-items-center">
+                                    <div class="bg-danger dot rounded-circle me-1"></div>
+                                    <small class="text-danger">
+                                        Unpublished
+                                    </small>
+                                </div>
+                            @endif
                         </td>
                         <td>
-                            <span class="text-muted">{{ $type->created_at}}</span>
+                            <span class="text-muted">{{ $type->created_at }}</span>
                         </td>
                         <td>
                             <div class="btn-group"><button
-                                    class="btn btn-link text-dark dropdown-toggle dropdown-toggle-split m-0 p-0"
+                                    class="p-0 m-0 btn btn-link text-dark dropdown-toggle dropdown-toggle-split"
                                     data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><svg
                                         class="icon icon-xs" fill="currentColor" viewBox="0 0 20 20"
                                         xmlns="http://www.w3.org/2000/svg">
@@ -195,34 +196,44 @@
                                             d="M6 10a2 2 0 11-4 0 2 2 0 014 0zM12 10a2 2 0 11-4 0 2 2 0 014 0zM16 12a2 2 0 100-4 2 2 0 000 4z">
                                         </path>
                                     </svg> <span class="visually-hidden">Toggle Dropdown</span></button>
-                                <div class="dropdown-menu dashboard-dropdown dropdown-menu-start mt-2 py-1">
-                                    <a class="dropdown-item d-flex align-items-center" href="{{ route('education-types.unpublish',$type->id) }}"><svg
-                                            class="dropdown-icon text-gray-400 me-2" fill="currentColor"
+                                <div class="py-1 mt-2 dropdown-menu dashboard-dropdown dropdown-menu-start">
+                                    <a class="dropdown-item d-flex align-items-center"
+                                        href="{{ route('education-types.unpublish', $type->id) }}"><svg
+                                            class="text-gray-400 dropdown-icon me-2" fill="currentColor"
                                             viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
                                             <path fill-rule="evenodd"
                                                 d="M10 1.944A11.954 11.954 0 012.166 5C2.056 5.649 2 6.319 2 7c0 5.225 3.34 9.67 8 11.317C14.66 16.67 18 12.225 18 7c0-.682-.057-1.35-.166-2.001A11.954 11.954 0 0110 1.944zM11 14a1 1 0 11-2 0 1 1 0 012 0zm0-7a1 1 0 10-2 0v3a1 1 0 102 0V7z"
                                                 clip-rule="evenodd"></path>
                                         </svg> Unpublish </a><a class="dropdown-item d-flex align-items-center"
-                                        href="{{ route('education-types.edit',$type->id) }}"><svg class="dropdown-icon text-gray-400 me-2" fill="currentColor"
+                                        href="{{ route('education-types.edit', $type->id) }}"><svg
+                                            class="text-gray-400 dropdown-icon me-2" fill="currentColor"
                                             viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
                                             <path d="M10 12a2 2 0 100-4 2 2 0 000 4z"></path>
                                             <path fill-rule="evenodd"
                                                 d="M.458 10C1.732 5.943 5.522 3 10 3s8.268 2.943 9.542 7c-1.274 4.057-5.064 7-9.542 7S1.732 14.057.458 10zM14 10a4 4 0 11-8 0 4 4 0 018 0z"
                                                 clip-rule="evenodd"></path>
                                         </svg> Edit</a><a class="dropdown-item d-flex align-items-center"
-                                        href="{{ route('education-types.destroy',$type->id) }}"><svg class="dropdown-icon text-danger me-2" fill="currentColor"
+                                        href="{{ route('education-types.destroy', $type->id) }}"><svg
+                                            class="dropdown-icon text-danger me-2" fill="currentColor"
                                             viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
                                             <path
                                                 d="M11 6a3 3 0 11-6 0 3 3 0 016 0zM14 17a6 6 0 00-12 0h12zM13 8a1 1 0 100 2h4a1 1 0 100-2h-4z">
                                             </path>
-                                        </svg>Delete</a></div>
+                                        </svg>Delete</a>
+                                </div>
                             </div>
-                            <form action="{{ route('education-types.destroy', $type->id) }}" method="POST" onsubmit="return confirm('Are you sure you want to delete this item?');" style="display:inline;">
+                            <form action="{{ route('education-types.destroy', $type->id) }}" method="POST"
+                                onsubmit="return confirm('Are you sure you want to delete this item?');"
+                                style="display:inline;">
                                 @csrf
                                 @method('DELETE')
-                                <button type="submit" class="btn btn-link p-0 m-0 align-baseline" title="Delete" data-bs-toggle="tooltip">
-                                    <svg class="icon icon-xs text-danger ms-1" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
-                                        <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zM8.707 7.293a1 1 0 00-1.414 1.414L8.586 10l-1.293 1.293a1 1 0 101.414 1.414L10 11.414l1.293 1.293a1 1 0 001.414-1.414L11.414 10l1.293-1.293a1 1 0 00-1.414-1.414L10 8.586 8.707 7.293z" clip-rule="evenodd"></path>
+                                <button type="submit" class="p-0 m-0 align-baseline btn btn-link" title="Delete"
+                                    data-bs-toggle="tooltip">
+                                    <svg class="icon icon-xs text-danger ms-1" fill="currentColor" viewBox="0 0 20 20"
+                                        xmlns="http://www.w3.org/2000/svg">
+                                        <path fill-rule="evenodd"
+                                            d="M10 18a8 8 0 100-16 8 8 0 000 16zM8.707 7.293a1 1 0 00-1.414 1.414L8.586 10l-1.293 1.293a1 1 0 101.414 1.414L10 11.414l1.293 1.293a1 1 0 001.414-1.414L11.414 10l1.293-1.293a1 1 0 00-1.414-1.414L10 8.586 8.707 7.293z"
+                                            clip-rule="evenodd"></path>
                                     </svg>
                                 </button>
                             </form>

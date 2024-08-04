@@ -21,7 +21,7 @@ class EducationTypePolicy
      */
     public function view(User $user, EducationType $educationType): bool
     {
-        return $user->hasPermissionTo('create eduaction-types');
+        return $user->hasPermissionTo('view eduaction-types');
     }
 
     /**
@@ -29,7 +29,7 @@ class EducationTypePolicy
      */
     public function create(User $user): bool
     {
-        return $user->hasPermissionTo('create eduaction-types');
+        return $user->hasPermissionTo('create education-types');
     }
 
     /**
@@ -63,9 +63,9 @@ class EducationTypePolicy
     public function manage(User $user)
     {
         return $user->can('view education-types') ||
-               $user->can('create education-types') ||
-               $user->can('update education-types') ||
-               $user->can('edit education-types') ||
-               $user->can('delete education-types');
+            $user->can('create education-types') ||
+            $user->can('update education-types') ||
+            $user->can('edit education-types') ||
+            $user->can('delete education-types');
     }
 }

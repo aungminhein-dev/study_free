@@ -69,4 +69,8 @@ class User extends Authenticatable
             'password' => 'hashed',
         ];
     }
+    public function is_admin()
+    {
+        return User::hasRole('admin');
+    }
 }

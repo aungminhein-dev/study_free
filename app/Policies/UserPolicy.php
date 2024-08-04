@@ -12,7 +12,7 @@ class UserPolicy
      */
     public function viewAny(User $user): bool
     {
-        //
+        return ($user->hasPermissionTo('view users'));
     }
 
     /**
@@ -20,7 +20,7 @@ class UserPolicy
      */
     public function view(User $user, User $model): bool
     {
-        //
+        return $user->id == $model->id && $user->hasPermissionTo('view users');
     }
 
     /**
@@ -36,7 +36,7 @@ class UserPolicy
      */
     public function update(User $user, User $model): bool
     {
-        //
+        return $user->id == $model->id && $user->hasPermissionTo('update user');
     }
 
     /**
@@ -44,7 +44,7 @@ class UserPolicy
      */
     public function delete(User $user, User $model): bool
     {
-        //
+        return $user->id == $model->id && $user->hasPermissionTo('delete user');
     }
 
     /**
@@ -64,9 +64,9 @@ class UserPolicy
     }
     public function manage(User $user)
     {
-        return $user->can('view education-types') ||
-               $user->can('create education-types') ||
-               $user->can('update education-types') ||
-               $user->can('delete education-types');
+        return $user->can('view users') ||
+            $user->can('create users') ||
+            $user->can('update users') ||
+            $user->can('delete users');
     }
 }
