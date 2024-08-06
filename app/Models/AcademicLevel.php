@@ -9,7 +9,7 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 class AcademicLevel extends Model
 {
     use HasFactory;
-    protected $fillable = ['education_type_id','name'];
+    protected $fillable = ['education_type_id','academic_level'];
 
     public function educationType()
     {

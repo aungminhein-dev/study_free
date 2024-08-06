@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\AcademicLevel;
+use App\Models\EducationType;
 use Illuminate\Http\Request;
 
 class AcademicLevelController extends Controller
@@ -11,7 +13,8 @@ class AcademicLevelController extends Controller
      */
     public function index()
     {
-        //
+        $levels = AcademicLevel::with('educationType')->get();
+        return view('academic-level.index',compact('levels'));
     }
 
     /**
@@ -19,7 +22,8 @@ class AcademicLevelController extends Controller
      */
     public function create()
     {
-        //
+        $educationTypes = EducationType::all();
+        return view('auth.academic-level.create',compact('educationTypes'));
     }
 
     /**
@@ -27,7 +31,16 @@ class AcademicLevelController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $request->validate([
+            'levelName' => 'required',
+            'typeId'=> 'required'
+        ]);
+        $data = [
+            'academic_level' => $request->levelName,
+            'education_type_id' => $request->typeId
+        ];
+        AcademicLevel::create($data);
+        return to_route('academic-levels.index');
     }
 
     /**
@@ -35,7 +48,8 @@ class AcademicLevelController extends Controller
      */
     public function show(string $id)
     {
-        //
+        $data = AcademicLevel::where('id',$id)->first();
+        return view('auth.academic-level.show',compact('data'));
     }
 
     /**
@@ -43,7 +57,9 @@ class AcademicLevelController extends Controller
      */
     public function edit(string $id)
     {
-        //
+        $data = AcademicLevel::where('id',$id)->first();
+        $educationTypes = EducationType::all();
+        return view('auth.academic-level.edit',compact('data','educationTypes'));
     }
 
     /**
@@ -51,7 +67,17 @@ class AcademicLevelController extends Controller
      */
     public function update(Request $request, string $id)
     {
-        //
+        $request->validate([
+            'levelName' => 'required',
+            'educationTypeId'=> 'required'
+        ]);
+        $data = [
+            'academic_level' => $request->name,
+            'education_type_id' => $request->educationTypeId
+        ];
+        $data = AcademicLevel::where('id',$id)->first();
+        $data->update($data);
+        return to_route('academic-levels.index');
     }
 
     /**
@@ -59,6 +85,8 @@ class AcademicLevelController extends Controller
      */
     public function destroy(string $id)
     {
-        //
+        $data = AcademicLevel::where('id',$id)->first();
+        $data->delete();
+        return to_route('academic-levels.index');
     }
 }

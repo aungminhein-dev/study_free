@@ -12,7 +12,6 @@ class CheckRole
         if (!Auth::user()->hasRole($role)) {
             return redirect('/'); // Redirect or show an unauthorized page
         }
-
         return $next($request);
     }
 }

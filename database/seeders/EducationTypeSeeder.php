@@ -3,8 +3,7 @@
 namespace Database\Seeders;
 
 use Illuminate\Database\Seeder;
-use Illuminate\Support\Facades\DB;
-use Illuminate\Database\Console\Seeds\WithoutModelEvents;
+use App\Models\EducationType; // Import the EducationType model
 
 class EducationTypeSeeder extends Seeder
 {
@@ -13,10 +12,14 @@ class EducationTypeSeeder extends Seeder
      */
     public function run()
     {
-        DB::table('education_types')->insert([
+        $educationTypes = [
             ['name' => 'Grade-12 (Myanmar)', 'publish_status' => true],
             ['name' => 'IGCSE', 'publish_status' => true],
             ['name' => 'GED', 'publish_status' => true],
-        ]);
+        ];
+
+        foreach ($educationTypes as $type) {
+            EducationType::create($type);
+        }
     }
 }

@@ -4,7 +4,7 @@ namespace Database\Seeders;
 
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\DB;
-use Illuminate\Database\Console\Seeds\WithoutModelEvents;
+use App\Models\AcademicLevel; // Import the AcademicLevel model
 
 class AcademicLevelSeeder extends Seeder
 {
@@ -15,7 +15,7 @@ class AcademicLevelSeeder extends Seeder
         $generalEducationId = $educationTypes['Grade-12 (Myanmar)'];
         $igcseId = $educationTypes['IGCSE'];
 
-        DB::table('academic_levels')->insert([
+        $academicLevels = [
             ['academic_level' => 'Grade 1', 'education_type_id' => $generalEducationId],
             ['academic_level' => 'Grade 2', 'education_type_id' => $generalEducationId],
             ['academic_level' => 'Grade 3', 'education_type_id' => $generalEducationId],
@@ -28,7 +28,22 @@ class AcademicLevelSeeder extends Seeder
             ['academic_level' => 'Grade 10', 'education_type_id' => $generalEducationId],
             ['academic_level' => 'Grade 11', 'education_type_id' => $generalEducationId],
             ['academic_level' => 'Grade 12', 'education_type_id' => $generalEducationId],
+            ['academic_level' => 'Year 1', 'education_type_id' => $igcseId],
+            ['academic_level' => 'Year 2', 'education_type_id' => $igcseId],
+            ['academic_level' => 'Year 3', 'education_type_id' => $igcseId],
+            ['academic_level' => 'Year 4', 'education_type_id' => $igcseId],
+            ['academic_level' => 'Year 5', 'education_type_id' => $igcseId],
+            ['academic_level' => 'Year 6', 'education_type_id' => $igcseId],
+            ['academic_level' => 'Year 7', 'education_type_id' => $igcseId],
+            ['academic_level' => 'Year 8', 'education_type_id' => $igcseId],
+            ['academic_level' => 'Year 9', 'education_type_id' => $igcseId],
+            ['academic_level' => 'Year 10', 'education_type_id' => $igcseId],
+            ['academic_level' => 'Year 11', 'education_type_id' => $igcseId],
+            ['academic_level' => 'Year 12', 'education_type_id' => $igcseId],
             ['academic_level' => 'IGCSE', 'education_type_id' => $igcseId],
-        ]);
+        ];
+        foreach ($academicLevels as $level) {
+            AcademicLevel::create($level);
+        }
     }
 }

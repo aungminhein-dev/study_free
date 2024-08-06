@@ -346,7 +346,113 @@
             @endcan
 
 
+            @can('add academic-levels' ||
+                'edit academic-levels' ||
+                'update academic-levels' ||
+                'delete
+                academic-levels' ||
+                'view academic-levels')
+                <li class="nav-item {{ request()->is('academic-levels*') ? 'active' : '' }}">
+                    <span class="nav-link collapsed d-flex justify-content-between align-items-center"
+                        data-bs-toggle="collapse" data-bs-target="#submenu-academic-levels">
+                        <span>
+                            <span class="sidebar-icon">
+                                <svg class="icon icon-xs me-2" fill="none" stroke="currentColor" viewBox="0 0 20 20"
+                                    xmlns="http://www.w3.org/2000/svg">
+                                    <path d="M12 14l9-5-9-5-9 5 9 5z"></path>
+                                    <path
+                                        d="M12 14l6.16-3.422a12.083 12.083 0 01.665 6.479A11.952 11.952 0 0012 20.055a11.952 11.952 0 00-6.824-2.998 12.078 12.078 0 01.665-6.479L12 14z">
+                                    </path>
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                        d="M12 14l9-5-9-5-9 5 9 5zm0 0l6.16-3.422a12.083 12.083 0 01.665 6.479A11.952 11.952 0 0012 20.055a11.952 11.952 0 00-6.824-2.998 12.078 12.078 0 01.665-6.479L12 14zm-4 6v-7.5l4-2.222">
+                                    </path>
+                                </svg>
+                            </span>
+                            <span class="sidebar-text">Academic Levels</span>
+                        </span>
+                        <span class="link-arrow">
+                            <svg class="icon icon-sm" fill="currentColor" viewBox="0 0 20 20"
+                                xmlns="http://www.w3.org/2000/svg">
+                                <path fill-rule="evenodd"
+                                    d="M7.293 14.707a1 1 0 010-1.414L10.586 10 7.293 6.707a1 1 0 011.414-1.414l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414 0z"
+                                    clip-rule="evenodd"></path>
+                            </svg>
+                        </span>
+                    </span>
+                    <div class="multi-level collapse" role="list" id="submenu-academic-levels" aria-expanded="false">
+                        <ul class="flex-column nav">
+                            @can('viewAny academic-levels')
+                                <li class="nav-item {{ request()->routeIs('academic-levels.index') ? 'active' : '' }}">
+                                    <a class="nav-link" href="{{ route('academic-levels.index') }}">
+                                        <span class="sidebar-text">List</span>
+                                    </a>
+                                </li>
+                            @endcan
+                            @can('create academic-levels')
+                                <li class="nav-item {{ request()->routeIs('academic-levels.create') ? 'active' : '' }}">
+                                    <a class="nav-link" href="{{ route('academic-levels.create') }}">
+                                        <span class="sidebar-text">Create a level</span>
+                                    </a>
+                                </li>
+                            @endcan
+                        </ul>
+                    </div>
+                </li>
+            @endcan
 
+            @can('add question-groups' ||
+                'edit question-groups' ||
+                'update question-groups' ||
+                'delete
+                question-groups' ||
+                'view question-groups')
+                <li class="nav-item {{ request()->is('question-groups*') ? 'active' : '' }}">
+                    <span class="nav-link collapsed d-flex justify-content-between align-items-center"
+                        data-bs-toggle="collapse" data-bs-target="#submenu-question-groups">
+                        <span>
+                            <span class="sidebar-icon">
+                                <svg class="icon icon-xs me-2" fill="none" stroke="currentColor" viewBox="0 0 20 20"
+                                    xmlns="http://www.w3.org/2000/svg">
+                                    <path d="M12 14l9-5-9-5-9 5 9 5z"></path>
+                                    <path
+                                        d="M12 14l6.16-3.422a12.083 12.083 0 01.665 6.479A11.952 11.952 0 0012 20.055a11.952 11.952 0 00-6.824-2.998 12.078 12.078 0 01.665-6.479L12 14z">
+                                    </path>
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                        d="M12 14l9-5-9-5-9 5 9 5zm0 0l6.16-3.422a12.083 12.083 0 01.665 6.479A11.952 11.952 0 0012 20.055a11.952 11.952 0 00-6.824-2.998 12.078 12.078 0 01.665-6.479L12 14zm-4 6v-7.5l4-2.222">
+                                    </path>
+                                </svg>
+                            </span>
+                            <span class="sidebar-text">Question Groups</span>
+                        </span>
+                        <span class="link-arrow">
+                            <svg class="icon icon-sm" fill="currentColor" viewBox="0 0 20 20"
+                                xmlns="http://www.w3.org/2000/svg">
+                                <path fill-rule="evenodd"
+                                    d="M7.293 14.707a1 1 0 010-1.414L10.586 10 7.293 6.707a1 1 0 011.414-1.414l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414 0z"
+                                    clip-rule="evenodd"></path>
+                            </svg>
+                        </span>
+                    </span>
+                    <div class="multi-level collapse" role="list" id="submenu-question-groups" aria-expanded="false">
+                        <ul class="flex-column nav">
+                            @can('viewAny question-groups')
+                                <li class="nav-item {{ request()->routeIs('question-groups.index') ? 'active' : '' }}">
+                                    <a class="nav-link" href="{{ route('question-groups.index') }}">
+                                        <span class="sidebar-text">List</span>
+                                    </a>
+                                </li>
+                            @endcan
+                            @can('create question-groups')
+                                <li class="nav-item {{ request()->routeIs('question-groups.create') ? 'active' : '' }}">
+                                    <a class="nav-link" href="{{ route('question-groups.create') }}">
+                                        <span class="sidebar-text">Create</span>
+                                    </a>
+                                </li>
+                            @endcan
+                        </ul>
+                    </div>
+                </li>
+            @endcan
             {{-- <li class="nav-item">
                 <span class="nav-link collapsed d-flex justify-content-between align-items-center"
                     data-bs-toggle="collapse" data-bs-target="#submenu-components">
@@ -408,21 +514,7 @@
                 </div>
             </li>
             <li role="separator" class="mt-4 mb-3 border-gray-700 dropdown-divider"></li>
-            <li class="nav-item">
-                <a href="https://themesberg.com/docs/volt-bootstrap-5-dashboard/getting-started/quick-start/"
-                    target="_blank" class="nav-link d-flex align-items-center">
-                    <span class="sidebar-icon">
-                        <svg class="icon icon-xs me-2" fill="currentColor" viewBox="0 0 20 20"
-                            xmlns="http://www.w3.org/2000/svg">
-                            <path fill-rule="evenodd"
-                                d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-8-3a1 1 0 00-.867.5 1 1 0 11-1.731-1A3 3 0 0113 8a3.001 3.001 0 01-2 2.83V11a1 1 0 11-2 0v-1a1 1 0 011-1 1 1 0 100-2zm0 8a1 1 0 100-2 1 1 0 000 2z"
-                                clip-rule="evenodd"></path>
-                        </svg>
-                    </span>
-                    <span class="sidebar-text">Documentation <span
-                            class="text-gray-800 badge badge-sm bg-secondary ms-1">v1.4</span></span>
-                </a>
-            </li>
+
             <li class="nav-item">
                 <a href="https://themesberg.com" target="_blank" class="nav-link d-flex align-items-center">
                     <span class="sidebar-icon">

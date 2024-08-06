@@ -28,7 +28,18 @@ class RoleAndPermissionSeeder extends Seeder
             'edit education-types',
             'view education-types',
             'update education-types',
-            'delete education-types'
+            'delete education-types',
+            'create academic-levels',
+            'edit academic-levels',
+            'view academic-levels',
+            'update academic-levels',
+            'delete academic-levels',
+            'create question-groups',
+            'edit question-groups',
+            'view question-groups',
+            'update question-groups',
+            'delete question-groups',
+
         ];
 
         foreach ($permissions as $permission) {
@@ -52,7 +63,17 @@ class RoleAndPermissionSeeder extends Seeder
             'edit education-types',
             'view education-types',
             'update education-types',
-            'delete education-types'
+            'delete education-types',
+            'create academic-levels',
+            'edit academic-levels',
+            'view academic-levels',
+            'update academic-levels',
+            'delete academic-levels',
+            'create question-groups',
+            'edit question-groups',
+            'view question-groups',
+            'update question-groups',
+            'delete question-groups',
         ]);
 
         // Viewer role with read-only access
@@ -64,8 +85,11 @@ class RoleAndPermissionSeeder extends Seeder
         // Author role with create and edit access
         $authorRole = Role::create(['name' => 'author']);
         $authorRole->givePermissionTo([
-            'create users',
-            'update users',
+            'create question-groups',
+            'edit question-groups',
+            'view question-groups',
+            'update question-groups',
+            'delete question-groups',
         ]);
 
         // Moderator role with permissions to manage roles and permissions
@@ -75,6 +99,11 @@ class RoleAndPermissionSeeder extends Seeder
             'update roles',
             'view permissions',
             'update permissions',
+            'create question-groups',
+            'edit question-groups',
+            'view question-groups',
+            'update question-groups',
+            'delete question-groups',
         ]);
     }
 }

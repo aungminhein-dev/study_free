@@ -10,6 +10,7 @@ use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\admin\UserController;
 use App\Http\Controllers\AcademicLevelController;
 use App\Http\Controllers\EducationTypeController;
+use App\Http\Controllers\QuestionGroupController;
 use App\Http\Controllers\RolePermissionController;
 
 Route::controller(HomeController::class)->group(function () {
@@ -28,6 +29,8 @@ Route::middleware(['auth:web', config('jetstream.auth_session'), 'verified',])->
     Route::resource('manage-roles', RolePermissionController::class);
     Route::resource('subjects', SubjectController::class);
     Route::resource('academic-levels', AcademicLevelController::class);
+    Route::resource('question-groups', QuestionGroupController::class);
+
 
     Route::middleware(['role:founder'])->group(function () {
         Route::controller(UserController::class)->prefix('users')->group(function () {
