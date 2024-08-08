@@ -8,4 +8,6 @@ use Illuminate\Database\Eloquent\Model;
 class QuestionGroup extends Model
 {
     use HasFactory;
+    protected $fillable = ['name','description','publish_status','chapter_id','user_id'];
+
 }

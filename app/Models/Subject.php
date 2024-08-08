@@ -9,11 +9,11 @@ class Subject extends Model
 {
     use HasFactory;
 
-    protected $fillable = ['name', 'education_type_id'];
+    protected $fillable = ['name', 'academic_level_id'];
 
-    public function educationType()
+    public function academicLevel()
     {
-        return $this->belongsTo(EducationType::class);
+        return $this->belongsTo(AcademicLevel::class);
     }
 
     public function chapters()

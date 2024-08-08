@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\EducationType;
 use App\Models\QuestionGroup;
 use Illuminate\Http\Request;
 
@@ -13,7 +14,7 @@ class QuestionGroupController extends Controller
     public function index()
     {
         $questionGroups = QuestionGroup::all();
-        return view('question-group.index');
+        return view('auth.question-group.index');
     }
 
     /**
@@ -21,7 +22,8 @@ class QuestionGroupController extends Controller
      */
     public function create()
     {
-        //
+        $educationTypes = EducationType::with('academicLevels')->get();
+        return view('auth.question-group.create',compact('educationTypes'));
     }
 
     /**
@@ -37,7 +39,7 @@ class QuestionGroupController extends Controller
      */
     public function show(string $id)
     {
-        //
+        return view('auth.question-group.show');
     }
 
     /**
@@ -45,7 +47,7 @@ class QuestionGroupController extends Controller
      */
     public function edit(string $id)
     {
-        //
+        return view('auth.question-group.edit');
     }
 
     /**

@@ -1,17 +1,17 @@
 <?php
 
-use App\Models\AcademicLevels;
-use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\AcademicLevelController;
+use App\Http\Controllers\admin\UserController;
+use App\Http\Controllers\AjaxController;
+use App\Http\Controllers\DashboardController;
+use App\Http\Controllers\EducationTypeController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\ProfileController;
-use App\Http\Controllers\SettingController;
-use App\Http\Controllers\SubjectController;
-use App\Http\Controllers\DashboardController;
-use App\Http\Controllers\admin\UserController;
-use App\Http\Controllers\AcademicLevelController;
-use App\Http\Controllers\EducationTypeController;
 use App\Http\Controllers\QuestionGroupController;
 use App\Http\Controllers\RolePermissionController;
+use App\Http\Controllers\SettingController;
+use App\Http\Controllers\SubjectController;
+use Illuminate\Support\Facades\Route;
 
 Route::controller(HomeController::class)->group(function () {
     Route::get('/', 'home')->name('home');
@@ -19,9 +19,11 @@ Route::controller(HomeController::class)->group(function () {
     Route::get('courses', 'courses')->name('courses');
     Route::get('about', 'about')->name('about');
 });
+Route::post('related-academic-levels/list', [AjaxController::class, 'loadAcademicLevelsViaEducationType']);
+Route::post('related-subjects/list', [AjaxController::class, 'loadSubjectsViaEducationType']);
+Route::post('related-chapters/list', [AjaxController::class, 'loadChaptersViaEducationType']);
 
-
-Route::middleware(['auth:web', config('jetstream.auth_session'), 'verified',])->group(function () {
+Route::middleware(['auth:web', config('jetstream.auth_session'), 'verified'])->group(function () {
     // Admin Routes
     Route::get('dashboard', [DashboardController::class, 'dashboard'])->name('dashboard');
     Route::resource('education-types', EducationTypeController::class)->middleware('can:view education-types,edit education-types,create education-types,update education-types,delete education-types');
@@ -30,7 +32,6 @@ Route::middleware(['auth:web', config('jetstream.auth_session'), 'verified',])->
     Route::resource('subjects', SubjectController::class);
     Route::resource('academic-levels', AcademicLevelController::class);
     Route::resource('question-groups', QuestionGroupController::class);
-
 
     Route::middleware(['role:founder'])->group(function () {
         Route::controller(UserController::class)->prefix('users')->group(function () {

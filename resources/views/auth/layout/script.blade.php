@@ -36,10 +36,16 @@
 <script async defer src="https://buttons.github.io/buttons.js') }}"></script>
 
 <!-- Volt JS -->
-<script src="{{ asset('admin_ui/assets/js/jquery.js') }} "></script>
+<script src="{{ asset('admin_ui/assets/js/jquery.min.js') }} "></script>
 
 
 <script>
+    $.ajaxSetup({
+        headers: {
+            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+        }
+    });
+
     function generateUsername() {
         const nameInput = document.getElementById('name').value;
         const username = nameInput.toLowerCase().replace(/\s+/g, '_');

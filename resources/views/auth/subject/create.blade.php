@@ -1,9 +1,9 @@
 @extends('auth.layout.app')
-@section('title', 'Create New User')
+@section('title', 'Create New Subject')
 @section('content')
     <div class="py-4">
 
-        <div class="d-flex justify-content-between w-100 flex-wrap">
+        <div class="flex-wrap d-flex justify-content-between w-100">
             <div class="mb-3 mb-lg-0">
                 <h1 class="h4">Create New Subject</h1>
                 <p class="mb-0">Create more subjects with multiple to get more dynamics!
@@ -17,10 +17,10 @@
     </div>
 
     <div class="row">
-        <div class="col-12 mb-4">
-            <div class="card border-0 shadow components-section">
+        <div class="mb-4 col-12">
+            <div class="border-0 shadow card components-section">
                 <div class="card-body">
-                    <form action="{{ route('subjects.store') }}" class="row mb-4 mt-4" method="post">
+                    <form action="{{ route('subjects.store') }}" class="mt-4 mb-4 row" method="post">
                         @csrf
                         @if ($errors->any())
                             <div class="alert alert-danger">
@@ -33,7 +33,7 @@
                         @endif
                         @csrf
                         <!-- Form -->
-                        <div class="form-group mb-4 col-12 col-sm-4">
+                        <div class="mb-4 form-group col-12 col-sm-4">
                             <label for="email">Subject Name
                             </label>
                             <div class="input-group">
@@ -54,16 +54,16 @@
                                 <span class="text-danger">{{ $message }}</span>
                             @enderror
                         </div>
-                        <div class="form-group mb-4 col-12 col-sm-4">
+                        <div class="mb-4 form-group col-12 col-sm-4">
                             <label for="gender">Education Type</label>
-                            <select class="form-select mb-0" name="typeId" id="">
+                            <select class="mb-0 form-select" name="typeId" id="">
                                 <option disabled>Select Education Type</option>
                                 @foreach ($educationTypes as $type)
                                     <option value="{{ $type->id }}">{{ $type->name }}</option>
                                 @endforeach
                             </select>
                         </div>
-                        <div class="form-group mb-4 col-12 col-sm-4">
+                        <div class="mb-4 form-group col-12 col-sm-4">
                             <label for="publishStatus">Publish Status</label>
                             <div class="input-group">
                                 <input class="form-check-input" name="status" type="checkbox" id="flexSwitchCheckDefault">

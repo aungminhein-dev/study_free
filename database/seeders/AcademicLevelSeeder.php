@@ -40,7 +40,6 @@ class AcademicLevelSeeder extends Seeder
             ['academic_level' => 'Year 10', 'education_type_id' => $igcseId],
             ['academic_level' => 'Year 11', 'education_type_id' => $igcseId],
             ['academic_level' => 'Year 12', 'education_type_id' => $igcseId],
-            ['academic_level' => 'IGCSE', 'education_type_id' => $igcseId],
         ];
         foreach ($academicLevels as $level) {
             AcademicLevel::create($level);

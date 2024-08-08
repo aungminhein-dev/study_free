@@ -17,7 +17,10 @@ return Application::configure(basePath: dirname(__DIR__))
             'permission' => \Spatie\Permission\Middleware\PermissionMiddleware::class,
             'role_or_permission' => \Spatie\Permission\Middleware\RoleOrPermissionMiddleware::class,
         ]);
+        $middleware->validateCsrfTokens(except: [
+            'related-academic-levels/*',
+            'related-chapters/*',
+
+        ]);
     })
-    ->withExceptions(function (Exceptions $exceptions) {
-        //
-    })->create();
+    ->withExceptions(function (Exceptions $exceptions) {})->create();
