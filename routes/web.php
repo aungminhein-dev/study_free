@@ -7,6 +7,7 @@ use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\EducationTypeController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\QuestionController;
 use App\Http\Controllers\QuestionGroupController;
 use App\Http\Controllers\RolePermissionController;
 use App\Http\Controllers\SettingController;
@@ -20,8 +21,8 @@ Route::controller(HomeController::class)->group(function () {
     Route::get('about', 'about')->name('about');
 });
 Route::post('related-academic-levels/list', [AjaxController::class, 'loadAcademicLevelsViaEducationType']);
-Route::post('related-subjects/list', [AjaxController::class, 'loadSubjectsViaEducationType']);
-Route::post('related-chapters/list', [AjaxController::class, 'loadChaptersViaEducationType']);
+Route::post('related-subjects/list', [AjaxController::class, 'loadSubjectsViaAcademicLevel']);
+Route::post('related-chapters/list/', [AjaxController::class, 'loadChaptersViaSubject']);
 
 Route::middleware(['auth:web', config('jetstream.auth_session'), 'verified'])->group(function () {
     // Admin Routes
@@ -32,6 +33,10 @@ Route::middleware(['auth:web', config('jetstream.auth_session'), 'verified'])->g
     Route::resource('subjects', SubjectController::class);
     Route::resource('academic-levels', AcademicLevelController::class);
     Route::resource('question-groups', QuestionGroupController::class);
+
+    Route::prefix('questions')->controller(QuestionController::class)->group(function () {
+        Route::get('create/{questionGroupId}', 'create')->name('questions.create');
+    });
 
     Route::middleware(['role:founder'])->group(function () {
         Route::controller(UserController::class)->prefix('users')->group(function () {

@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use App\Models\EducationType;
 use App\Models\QuestionGroup;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
+use Throwable;
 
 class QuestionGroupController extends Controller
 {
@@ -13,8 +15,9 @@ class QuestionGroupController extends Controller
      */
     public function index()
     {
-        $questionGroups = QuestionGroup::all();
-        return view('auth.question-group.index');
+        $questionGroups = QuestionGroup::paginate(10);
+
+        return view('auth.question-group.index', compact('questionGroups'));
     }
 
     /**
@@ -23,7 +26,8 @@ class QuestionGroupController extends Controller
     public function create()
     {
         $educationTypes = EducationType::with('academicLevels')->get();
-        return view('auth.question-group.create',compact('educationTypes'));
+
+        return view('auth.question-group.create', compact('educationTypes'));
     }
 
     /**
@@ -31,7 +35,28 @@ class QuestionGroupController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $status = $request->status == 'on' ?? false;
+        try {
+            $request->validate([
+                'questionGroupName' => 'required',
+                'description' => 'string',
+                'typeId' => 'required',
+                'chapterId' => 'required',
+            ]);
+            $data = [
+                'name' => $request->questionGroupName,
+                'description' => $request->description,
+                'chapter_id' => $request->typeId,
+                'publish_status' => $status,
+                'user_id' => Auth::user()->id,
+            ];
+
+            QuestionGroup::create($data);
+        } catch (Throwable $th) {
+            return $th;
+        }
+
+        return to_route('question-groups.index');
     }
 
     /**

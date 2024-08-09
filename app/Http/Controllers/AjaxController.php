@@ -19,7 +19,7 @@ class AjaxController extends Controller
         return response()->json($academicLevels, 200);
     }
 
-    public function loadSubjectsViaEducationType(Request $request)
+    public function loadSubjectsViaAcademicLevel(Request $request)
     {
         $subjects = Subject::where('academic_level_id', $request->academicLevelId)
             ->select('id', 'name')
@@ -28,11 +28,9 @@ class AjaxController extends Controller
         return response()->json($subjects, 200);
     }
 
-    public function loadChaptersViaEducationType(Request $request)
+    public function loadChaptersViaSubject(Request $request)
     {
-        $chapters = Chapter::where('subject_id', $request->subjectId)
-            ->select('id', 'name')
-            ->get();
+        $chapters = Chapter::where('subject_id', $request->subjectId)->select('name', 'id')->get();
 
         return response()->json($chapters, 200);
     }

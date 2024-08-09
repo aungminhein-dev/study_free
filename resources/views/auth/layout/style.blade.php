@@ -14,5 +14,7 @@
 
  <!-- Volt CSS -->
  <link type="text/css" href="{{ asset('admin_ui/css/datatable.css') }}" rel="stylesheet">
+ <link rel="stylesheet" href="{{ asset('summernote/summernote.min.css') }}">
+ {{-- <link rel="stylesheet" href="{{ asset('neumorphism/css/neumorphism.css') }}"> --}}
  {{-- <link type="text/css" href="{{ asset('admin_ui/css/fontawesome.min.css') }}" rel="stylesheet"> --}}
  <link type="text/css" href="{{ asset('admin_ui/css/volt.css') }}" rel="stylesheet">

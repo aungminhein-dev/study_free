@@ -59,6 +59,7 @@
         $('#logoutForm').submit()
     }
 </script>
+<script src="{{ asset('summernote/summernote.min.js') }}"></script>
 <script src="{{ asset('admin_ui/assets/js/datatable.min.js') }} "></script>
 <script src="{{ asset('admin_ui/assets/js/simple-datatable.js') }} "></script>
 <script src="{{ asset('admin_ui/assets/js/datatable.js') }} "></script>

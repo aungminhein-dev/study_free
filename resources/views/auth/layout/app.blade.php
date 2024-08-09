@@ -13,7 +13,6 @@
     @include('auth.layout.style')
     <!-- NOTICE: You can use the _analytics.html partial to include production code specific code & trackers -->
 
-</head>
 
 <body>
     <!-- NOTICE: You can use the _analytics.html partial to include production code specific code & trackers -->
@@ -101,7 +100,6 @@
     </main>
 
     @include('auth.layout.script')
-
     @yield('scripts')
 </body>
 

@@ -2,14 +2,15 @@
 
 namespace App\Providers;
 
+use App\Models\EducationType;
 use App\Models\User;
+use App\Policies\EducationTypePolicy;
 use App\Policies\RolePolicy;
 use App\Policies\UserPolicy;
-use App\Models\EducationType;
-use Spatie\Permission\Models\Role;
+use Illuminate\Pagination\Paginator;
 use Illuminate\Support\Facades\Gate;
-use App\Policies\EducationTypePolicy;
 use Illuminate\Support\ServiceProvider;
+use Spatie\Permission\Models\Role;
 
 class AppServiceProvider extends ServiceProvider
 {
@@ -20,8 +21,12 @@ class AppServiceProvider extends ServiceProvider
     {
         //
     }
+
     public function boot(): void
     {
+        // Paginator::useBootstrapFive();
+        Paginator::defaultView('vendor.pagination.bootstrap-5');
+
         Gate::before(function ($user, $ability) {
             return $user->hasRole('founder') ? true : null;
         });

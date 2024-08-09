@@ -1,5 +1,5 @@
 @extends('auth.layout.app')
-@section('title', 'Create New Subject')
+@section('title', 'Create New Question Group')
 @section('content')
     <div class="py-4">
 
@@ -20,7 +20,7 @@
         <div class="mb-4 col-12">
             <div class="border-0 shadow card components-section">
                 <div class="card-body">
-                    <form action="" class="mt-4 mb-4 row" method="post">
+                    <form action="{{ route('question-groups.store') }}" class="mt-4 mb-4 row" method="post">
                         @csrf
                         @if ($errors->any())
                             <div class="alert alert-danger">
@@ -31,7 +31,6 @@
                                 </ul>
                             </div>
                         @endif
-                        @csrf
                         <!-- Form -->
                         <div class="mb-4 form-group col-12 col-sm-4">
                             <label for="email">Question Group Name
@@ -47,17 +46,18 @@
                                     </svg>
                                 </span>
                                 <input type="text" class="form-control @error('questionGroupName') is-invalid @enderror"
-                                    placeholder="Physics, Chemistry, etc" value="{{ old('questionGroupName') }}"
-                                    name="questionGroupName" id="name" autofocus>
+                                    placeholder="Vol 1, Vol 2, Critical, etc" value="{{ old('questionGroupName') }}"
+                                    name="questionGroupName" autofocus>
                             </div>
-                            @error('name')
+                            @error('questionGroupName')
                                 <span class="text-danger">{{ $message }}</span>
                             @enderror
                         </div>
+
                         <div class="mb-4 form-group col-12 col-sm-4">
                             <label for="gender">Education Type</label>
                             <select class="mb-0 form-select" name="typeId" id="education-type">
-                                <option disabled>Select Education Type</option>
+                                <option disabled selected>Select Education Type</option>
                                 @foreach ($educationTypes as $type)
                                     <option value="{{ $type->id }}">{{ $type->name }}</option>
                                 @endforeach
@@ -66,21 +66,21 @@
 
                         <div class="mb-4 form-group col-12 col-sm-4">
                             <label for="gender">Academic Level</label>
-                            <select class="mb-0 form-select" name="typeId" id="related-academic-levels">
-                                <option disabled>Select Academic Level</option>
+                            <select class="mb-0 form-select" name="academicLevelId" id="related-academic-levels">
+                                <option disabled selected>Select Academic Level</option>
                             </select>
                         </div>
                         <div class="mb-4 form-group col-12 col-sm-4">
                             <label for="gender">Related Subject</label>
                             <select class="mb-0 form-select" name="subjectId" id="related-subjects">
-                                <option disabled>Select related subject</option>
+                                <option disabled selected>Select related subject</option>
 
                             </select>
                         </div>
                         <div class="mb-4 form-group col-12 col-sm-4">
                             <label for="gender">Chapter</label>
-                            <select class="mb-0 form-select" name="typeId" id="related-chapters">
-                                <option disabled>Select Chapter</option>
+                            <select class="mb-0 form-select" name="chapterId" id="related-chapters">
+                                <option disabled selected>Select Chapter</option>
 
                             </select>
                         </div>
@@ -89,6 +89,19 @@
                             <div class="input-group">
                                 <input class="form-check-input" name="status" type="checkbox" id="flexSwitchCheckDefault">
                             </div>
+                        </div>
+
+                        <div class="mb-4 form-group col-12 ">
+                            <label for="email">Description
+                            </label>
+                            <div class="input-group">
+                                <textarea name="description" class="form-control @error('description') is-invalid @enderror" id=""
+                                    cols="30" rows="10" value="{{ old('questionGroupName') }}">
+                                </textarea>
+                            </div>
+                            @error('description')
+                                <span class="text-danger">{{ $message }}</span>
+                            @enderror
                         </div>
 
                         <div class="">
@@ -157,8 +170,6 @@
             $('#related-subjects').html(
                 `<option disabled>Loading...</option>`
             );
-
-            // Force the dropdown to close and reopen
             $('#related-subjects').blur().focus();
 
             $.ajax({
@@ -191,13 +202,7 @@
             });
         }
         loadChapter = (subjectId) => {
-            $('#related-chapters').html(
-                `<option disabled>Loading...</option>`
-            );
-
-            // Force the dropdown to close and reopen
             $('#related-chapters').blur().focus();
-
             $.ajax({
                 url: '/related-chapters/list',
                 method: "POST",
@@ -209,7 +214,7 @@
                     let chapter = response;
                     if (chapter.length != 0) {
                         chapter.forEach(element => {
-                            $('#related-chapter').append(
+                            $('#related-chapters').append(
                                 `<option value="${element.id}">${element.name}</option>`
                             )
                         });
