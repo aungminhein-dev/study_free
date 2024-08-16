@@ -15,7 +15,7 @@ class QuestionGroupController extends Controller
      */
     public function index()
     {
-        $questionGroups = QuestionGroup::paginate(10);
+        $questionGroups = QuestionGroup::withCount('questions')->paginate(10);
 
         return view('auth.question-group.index', compact('questionGroups'));
     }

@@ -9,7 +9,7 @@ class Question extends Model
 {
     use HasFactory;
 
-    protected $fillable = ['chapter_id', 'type', 'question_text', 'options', 'answer_text'];
+    protected $fillable = ['question_group_id', 'type', 'question_text', 'options', 'answer'];
 
     protected $casts = [
         'options' => 'array', // Cast the JSON field to an array

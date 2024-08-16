@@ -43,7 +43,9 @@
                         </svg> Add Widget
                     </a>
 
-                    <a class="dropdown-item d-flex align-items-center" href="#"><svg
+
+                    <a data-bs-toggle="modal" data-bs-target="#modal-excelfile"
+                        class="dropdown-item d-flex align-items-center" href="#"><svg
                             class="text-gray-400 dropdown-icon me-2" fill="currentColor" viewBox="0 0 20 20"
                             xmlns="http://www.w3.org/2000/svg">
                             <path
@@ -63,7 +65,7 @@
         <div class="mb-4 col-12">
             <div class="border-0 shadow card components-section">
                 <div class="card-body">
-                    <form action="" class="mt-4 mb-4 row" method="post">
+                    <form action="{{ route('questions.store') }}" class="mt-4 mb-4 row" method="post">
                         @csrf
                         @if ($errors->any())
                             <div class="alert alert-danger">
@@ -77,12 +79,13 @@
                         <!-- Question Type -->
                         <div class="mb-4 form-group col-12 col-sm-4">
                             <label for="question-types">Question Type</label>
-                            <select class="mb-0 form-select" name="question_type" id="question-types">
+                            <select class="mb-0 form-select" name="type" id="question-types">
                                 <option value="mcq" selected>Multiple Choice Question</option>
-                                <option value="tf">True/False</option>
-                                <option value="blank">Fill in the blank</option>
+                                <option value="true_false">True/False</option>
+                                <option value="fill_in_the_blank">Fill in the blank</option>
                             </select>
                         </div>
+                        <input type="hidden" name="questionGroupId" value="{{ $questionGroupId }}">
 
                         <!-- Question Text -->
                         <div class="mb-4 form-group col-12">
@@ -107,6 +110,7 @@
                                             <label class="form-check-label" for="answer{{ $option }}">
                                                 Option {{ $option }}
                                             </label>
+
                                         </div>
                                     </label>
                                     <div class="input-group">
@@ -128,8 +132,8 @@
                             <div class="mb-4 form-group col-12 col-sm-3">
                                 <label for="trueType">
                                     <div class="form-check">
-                                        <input class="form-check-input" type="radio" name="correctAnswer" value="True"
-                                            id="trueType">
+                                        <input class="form-check-input" type="radio" name="correctAnswer"
+                                            value="True" id="trueType">
                                         <label class="form-check-label" for="trueType">True</label>
                                     </div>
                                 </label>
@@ -214,7 +218,7 @@
                         $('#mcq-answers').find('input, textarea, select').prop('disabled', false);
                         break;
 
-                    case "tf":
+                    case "true_false":
                         $('#mcq-answers').find('input, textarea, select').prop('disabled', true);
                         $('#mcq-answers').hide();
                         $('#true-false-answers').show();
@@ -223,7 +227,7 @@
                         $('#blank-answers').hide();
                         break;
 
-                    case "blank":
+                    case "fill_in_the_blank":
                         $('#mcq-answers').find('input, textarea, select').prop('disabled', true);
                         $('#mcq-answers').hide();
                         $('#true-false-answers').find('input, textarea, select').prop('disabled', true);

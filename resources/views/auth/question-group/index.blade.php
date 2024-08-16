@@ -97,7 +97,8 @@
                     </div>
                     <div class="px-0 mb-4 col-11 col-lg-8 mb-md-0">
                         <div class="mb-2">
-                            <h3 class="h5">{{ $group->name }}</h3>
+                            <h3 class="h5"><a href="{{ route('questions.index', $group->id) }}">{{ $group->name }}</a>
+                            </h3>
                             <div class="d-block d-sm-flex">
                                 <div>
                                     <h4 class="mb-3 h6 fw-normal text-gray mb-sm-0"><svg
@@ -106,8 +107,15 @@
                                             <path fill-rule="evenodd"
                                                 d="M10 18a8 8 0 100-16 8 8 0 000 16zm1-12a1 1 0 10-2 0v4a1 1 0 00.293.707l2.828 2.829a1 1 0 101.415-1.415L11 9.586V6z"
                                                 clip-rule="evenodd"></path>
-                                        </svg> {{ $group->created_at->diffForHumans() }}</h4>
+                                        </svg> {{ $group->created_at->diffForHumans() }}
+                                    </h4>
+
+
+
                                 </div>
+                                <div class="ms-sm-3"><span
+                                        class="badge super-badge bg-success">{{ $group->questions_count }}
+                                        Questions</span></div>
                                 @if ($group->publish_status)
                                     <div class="ms-sm-3"><span class="badge super-badge bg-success">Published</span></div>
                                 @else

@@ -27,6 +27,7 @@ Route::post('related-chapters/list/', [AjaxController::class, 'loadChaptersViaSu
 Route::middleware(['auth:web', config('jetstream.auth_session'), 'verified'])->group(function () {
     // Admin Routes
     Route::get('dashboard', [DashboardController::class, 'dashboard'])->name('dashboard');
+    Route::get('profile', [ProfileController::class, 'show'])->name('profile.show');
     Route::resource('education-types', EducationTypeController::class)->middleware('can:view education-types,edit education-types,create education-types,update education-types,delete education-types');
     Route::get('educations/publish/{id}', [EducationTypeController::class, 'unpublish'])->name('education-types.unpublish');
     Route::resource('manage-roles', RolePermissionController::class);
@@ -36,6 +37,9 @@ Route::middleware(['auth:web', config('jetstream.auth_session'), 'verified'])->g
 
     Route::prefix('questions')->controller(QuestionController::class)->group(function () {
         Route::get('create/{questionGroupId}', 'create')->name('questions.create');
+        Route::post('store', 'store')->name('questions.store');
+        Route::post('import', 'import')->name('questions.import');
+        Route::get('list/{questionGroupId}', 'index')->name('questions.index');
     });
 
     Route::middleware(['role:founder'])->group(function () {

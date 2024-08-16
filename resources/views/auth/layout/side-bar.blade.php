@@ -8,7 +8,7 @@
                         class="border-white card-img-top rounded-circle" alt="Bonnie Green">
                 </div>
                 <div class="d-block">
-                    <h2 class="mb-3 h5">Hi, Jane</h2>
+                    <h2 class="mb-3 h5">Hi, {{ Auth::user()->name }}</h2>
                     <form id="logoutForm" action="{{ route('logout') }}" method="post">
                         @csrf
                     </form>
@@ -43,7 +43,7 @@
                             alt="Volt Logo">
                     </span> --}}
 
-                    @role('admin')
+                    {{-- @role('admin')
                         <span class="mt-1 ms-1 sidebar-text">Hello {{ Str::before(Auth::user()->name, ' ') }}</span>
                     @endrole
                     @role('teacher')
@@ -51,7 +51,7 @@
                     @endrole
                     @role('user')
                         <span class="mt-1 ms-1 sidebar-text">Hello {{ Auth::user()->name }}</span>
-                    @endrole
+                    @endrole --}}
                 </a>
             </li>
             <li class="nav-item {{ request()->routeIs('dashboard') ? 'active' : '' }}">
@@ -85,23 +85,6 @@
                     </span>
                 </a>
             </li>
-
-
-
-            <li class="nav-item  {{ request()->routeIs('settings') ? 'active' : '' }}">
-                <a href="{{ route('settings', Auth::user()->id) }}" class="nav-link">
-                    <span class="sidebar-icon">
-                        <svg class="icon icon-xs me-2" fill="currentColor" viewBox="0 0 20 20"
-                            xmlns="http://www.w3.org/2000/svg">
-                            <path fill-rule="evenodd"
-                                d="M11.49 3.17c-.38-1.56-2.6-1.56-2.98 0a1.532 1.532 0 01-2.286.948c-1.372-.836-2.942.734-2.106 2.106.54.886.061 2.042-.947 2.287-1.561.379-1.561 2.6 0 2.978a1.532 1.532 0 01.947 2.287c-.836 1.372.734 2.942 2.106 2.106a1.532 1.532 0 012.287.947c.379 1.561 2.6 1.561 2.978 0a1.533 1.533 0 012.287-.947c1.372.836 2.942-.734 2.106-2.106a1.533 1.533 0 01.947-2.287c1.561-.379 1.561-2.6 0-2.978a1.532 1.532 0 01-.947-2.287c.836-1.372-.734-2.942-2.106-2.106a1.532 1.532 0 01-2.287-.947zM10 13a3 3 0 100-6 3 3 0 000 6z"
-                                clip-rule="evenodd"></path>
-                        </svg>
-                    </span>
-                    <span class="sidebar-text">Settings</span>
-                </a>
-            </li>
-
             {{-- <li class="nav-item">
                 <a href="https://demo.themesberg.com/volt-pro/pages/calendar.html" target="_blank"
                     class="nav-link d-flex justify-content-between">
@@ -207,7 +190,7 @@
                             @can('viewAny', App\Models\EducationType::class)
                                 <li class="nav-item {{ request()->routeIs('education-types.index') ? 'active' : '' }}">
                                     <a class="nav-link" href="{{ route('education-types.index') }}">
-                                        <span class="sidebar-text">List</span>
+                                        <span class="sidebar-text">Education Types List</span>
                                     </a>
                                 </li>
                             @endcan
@@ -248,14 +231,14 @@
                 </span>
                 <div class="multi-level collapse " role="list" id="submenu-subjects" aria-expanded="false">
                     <ul class="flex-column nav">
-                        <li class="nav-item {{ request()->routeIs('subjects.create') ? 'active' : '' }}">
-                            <a class="nav-link" href="{{ route('subjects.create') }}">
-                                <span class="sidebar-text">Add Subject</span>
-                            </a>
-                        </li>
                         <li class="nav-item {{ request()->routeIs('subjects.index') ? 'active' : '' }}">
                             <a class="nav-link" href="{{ route('subjects.index') }}">
-                                <span class="sidebar-text">Subject List</span>
+                                <span class="sidebar-text">Subjects List</span>
+                            </a>
+                        </li>
+                        <li class="nav-item {{ request()->routeIs('subjects.create') ? 'active' : '' }}">
+                            <a class="nav-link" href="{{ route('subjects.create') }}">
+                                <span class="sidebar-text">Create Subject</span>
                             </a>
                         </li>
                     </ul>
@@ -288,7 +271,7 @@
                             @can('view', App\Models\Use::class)
                                 <li class="nav-item {{ request()->routeIs('admin.users.list') ? 'active' : '' }}">
                                     <a class="nav-link" href="{{ route('admin.users-list') }}">
-                                        <span class="sidebar-text">List</span>
+                                        <span class="sidebar-text">Users List</span>
                                     </a>
                                 </li>
                             @endcan
@@ -330,13 +313,13 @@
                         <ul class="flex-column nav">
                             <li class="nav-item {{ request()->routeIs('manage-roles.index') ? 'active' : '' }}">
                                 <a class="nav-link" href="{{ route('manage-roles.index') }}">
-                                    <span class="sidebar-text">List</span>
+                                    <span class="sidebar-text">Roles List</span>
                                 </a>
                             </li>
                             @can('create', Spatie\Permission\Models\Role::class)
                                 <li class="nav-item {{ request()->routeIs('manage-roles.create') ? 'active' : '' }}">
                                     <a class="nav-link" href="{{ route('manage-roles.create') }}">
-                                        <span class="sidebar-text">Create New Role</span>
+                                        <span class="sidebar-text">Create Role</span>
                                     </a>
                                 </li>
                             @endcan
@@ -384,7 +367,7 @@
                             @can('viewAny academic-levels')
                                 <li class="nav-item {{ request()->routeIs('academic-levels.index') ? 'active' : '' }}">
                                     <a class="nav-link" href="{{ route('academic-levels.index') }}">
-                                        <span class="sidebar-text">List</span>
+                                        <span class="sidebar-text">Academic Levels List</span>
                                     </a>
                                 </li>
                             @endcan
@@ -438,14 +421,14 @@
                             @can('viewAny question-groups')
                                 <li class="nav-item {{ request()->routeIs('question-groups.index') ? 'active' : '' }}">
                                     <a class="nav-link" href="{{ route('question-groups.index') }}">
-                                        <span class="sidebar-text">List</span>
+                                        <span class="sidebar-text">Groups List</span>
                                     </a>
                                 </li>
                             @endcan
                             @can('create question-groups')
                                 <li class="nav-item {{ request()->routeIs('question-groups.create') ? 'active' : '' }}">
                                     <a class="nav-link" href="{{ route('question-groups.create') }}">
-                                        <span class="sidebar-text">Create</span>
+                                        <span class="sidebar-text">Create Group</span>
                                     </a>
                                 </li>
                             @endcan
@@ -453,6 +436,22 @@
                     </div>
                 </li>
             @endcan
+
+
+            <li role="separator" class="mt-4 mb-3 border-gray-700 dropdown-divider"></li>
+            <li class="nav-item  {{ request()->routeIs('settings') ? 'active' : '' }}">
+                <a href="{{ route('settings', Auth::user()->id) }}" class="nav-link">
+                    <span class="sidebar-icon">
+                        <svg class="icon icon-xs me-2" fill="currentColor" viewBox="0 0 20 20"
+                            xmlns="http://www.w3.org/2000/svg">
+                            <path fill-rule="evenodd"
+                                d="M11.49 3.17c-.38-1.56-2.6-1.56-2.98 0a1.532 1.532 0 01-2.286.948c-1.372-.836-2.942.734-2.106 2.106.54.886.061 2.042-.947 2.287-1.561.379-1.561 2.6 0 2.978a1.532 1.532 0 01.947 2.287c-.836 1.372.734 2.942 2.106 2.106a1.532 1.532 0 012.287.947c.379 1.561 2.6 1.561 2.978 0a1.533 1.533 0 012.287-.947c1.372.836 2.942-.734 2.106-2.106a1.533 1.533 0 01.947-2.287c1.561-.379 1.561-2.6 0-2.978a1.532 1.532 0 01-.947-2.287c.836-1.372-.734-2.942-2.106-2.106a1.532 1.532 0 01-2.287-.947zM10 13a3 3 0 100-6 3 3 0 000 6z"
+                                clip-rule="evenodd"></path>
+                        </svg>
+                    </span>
+                    <span class="sidebar-text">Settings</span>
+                </a>
+            </li>
             {{-- <li class="nav-item">
                 <span class="nav-link collapsed d-flex justify-content-between align-items-center"
                     data-bs-toggle="collapse" data-bs-target="#submenu-components">
@@ -513,7 +512,7 @@
                     </ul>
                 </div>
             </li>
-            <li role="separator" class="mt-4 mb-3 border-gray-700 dropdown-divider"></li>
+
 
             <li class="nav-item">
                 <a href="https://themesberg.com" target="_blank" class="nav-link d-flex align-items-center">
